@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06628add906340d47b7ffa48c8ae45e6, type: 3}
-  m_Name: New Syrup
+  m_Name: Matcha
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: b006a208c3784254fb4c2812b098115f, type: 3}
