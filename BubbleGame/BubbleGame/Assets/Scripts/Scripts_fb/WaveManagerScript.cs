@@ -7,16 +7,16 @@ public class WaveManagerScript : MonoBehaviour
     public float[][] waves = new float[][]
     {
         new float[] { 0f, 2f, 4f },
-        new float[] { 0f, 0f, 0f },
+/*         new float[] { 0f, 0f, 0f },
         new float[] { 1f },
         new float[] { 3f, 3f, 3f },
         new float[] { 2f, 3f, 4f },
-        new float[] { 0f, 0f, 4f, 4f }
+        new float[] { 0f, 0f, 4f , 4f} */
     };
     public int waveCounter = 0;
     public List<GameObject> customers;
     public int activeTimers = 0;
-    public Transform spawnTransform;
+    public List<Transform> spawnTransformList;
     public GameObject customerPrefab;
 
     void Start()
@@ -54,13 +54,13 @@ public class WaveManagerScript : MonoBehaviour
     }
     void InstantiateCustomer()
     {
-        // Istanzia il prefabn
-        Vector3 spawnPosition = spawnTransform.position;
+        // Istanzia il prefab
+        Vector3 spawnPosition = spawnTransformList[customers.Count].position;
         GameObject newCustomer = Instantiate(customerPrefab, spawnPosition, Quaternion.identity);
         customers.Add(newCustomer);
         Debug.Log("Customer instantiated. Total customers: " + customers.Count);
 
-        // Log the position of the new customer
+        //Log the position of the new customer
         Debug.Log("New customer position: " + newCustomer.transform.position);
     }
 
