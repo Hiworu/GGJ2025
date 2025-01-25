@@ -5,5 +5,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [NonSerialized] public int Score = 0;
+    [NonSerialized] public int Score;
+    [NonSerialized] public int Cash;
+
+    private void Start()
+    {
+        Cash = 0;
+        Score = 0;
+    }
 }
