@@ -11,7 +11,6 @@ public class SeagullManager : MonoBehaviour
    public float attackSeagullTime;
    
    
-   public GameObject bancone;
    public GameObject seagullPrefab;
    public Transform seagullSpawnPoint;
    
@@ -23,6 +22,7 @@ public class SeagullManager : MonoBehaviour
    private float _currentTime = 0f;
    private float _currentSeagullSpawnTime = 0;
    private float _currentAttackSeagullTime = 0;
+   private Vector3 _verticalOffset = new Vector3(1, 1.9f, 0);
 
    private GameObject _activeSeagull;
    private WaveManagerScript _waveManager;
@@ -64,13 +64,21 @@ public class SeagullManager : MonoBehaviour
    {
       _currentSeagullSpawnTime += Time.deltaTime;
 
-      float step = Vector3.Distance(_activeSeagull.transform.position, bancone.transform.position) / seagullTimer *
-                   Time.deltaTime;
-      _activeSeagull.transform.position = Vector3.MoveTowards
-         (_activeSeagull.transform.position, bancone.transform.position, step);
-      if (_currentSeagullSpawnTime >= seagullTimer)
+
+
+      if (_waveManager.customers.Count > 0)
       {
-         IsAttackedBySeagull = true;
+         GameObject firstCustomer = _waveManager.customers[0];
+         Vector3 targetPosition = firstCustomer.transform.position + _verticalOffset;
+
+         float step = Vector3.Distance(seagullPrefab.transform.position, targetPosition) / seagullTimer *
+                      Time.deltaTime;
+         _activeSeagull.transform.position = Vector3.MoveTowards
+            (_activeSeagull.transform.position, targetPosition, step);
+         if (_currentSeagullSpawnTime >= seagullTimer)
+         {
+            IsAttackedBySeagull = true;
+         }
       }
    }
 
@@ -93,7 +101,6 @@ public class SeagullManager : MonoBehaviour
       {
          GameObject firstCustomer = _waveManager.customers[0];
          _waveManager.removeCustomer(firstCustomer);
-         Debug.Log("Seagull removed the first customer!");
       }
       ResetSeagull();
    }
