@@ -123,11 +123,13 @@ public class CustomerOrder : MonoBehaviour
         Debug.Log(body);
         GameObject hair = customerStyles[1];
         Debug.Log(hair);
+        GameObject shirt = customerStyles[2];
+        Debug.Log(shirt);
 
 
 
 
-        if (body != null && hair != null)
+        if (body != null && hair != null )
         {
             GameObject bodyClone = Instantiate(body, this.transform.position , Quaternion.identity);
             bodyClone.transform.SetParent(this.transform); // Imposta this come genitore
@@ -138,12 +140,15 @@ public class CustomerOrder : MonoBehaviour
             GameObject hairChild = hairClone.transform.Find("Hair").gameObject;
             Debug.Log(hair);
             spriteRenderer = hairChild.GetComponent<SpriteRenderer>();
-            float r = Random.Range(0f, 1f); // Valore casuale per il rosso
-            float g = Random.Range(0f, 1f); // Valore casuale per il verde
-            float b = Random.Range(0f, 1f); // Valore casuale per il blu
+            spriteRenderer.color = RandomColorCreator();
 
-            Color randomColor = new Color(r, g, b);
-            spriteRenderer.color = randomColor;
+            GameObject shirtClone = Instantiate(shirt, this.transform.position, Quaternion.identity);
+            shirtClone.transform.SetParent(this.transform); // Imposta this come genitore
+            GameObject shirtChild = shirtClone.transform.Find("Shirt").gameObject;
+            spriteRenderer = shirtChild.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = RandomColorCreator();
+
+
             Debug.Log("Hair aggiunto come figlio: " + hair.name);
         }
         else
@@ -151,6 +156,14 @@ public class CustomerOrder : MonoBehaviour
             Debug.LogWarning("Impossibile aggiungere body o hair come figli: uno o entrambi non sono stati trovati.");
         }
 
+    }
+
+public Color RandomColorCreator()
+    {
+        float r = Random.Range(0f, 1f); // Valore casuale per il rosso
+        float g = Random.Range(0f, 1f); // Valore casuale per il verde
+        float b = Random.Range(0f, 1f); // Valore casuale per il blu
+        return new Color(r, g, b);
     }
 
  public List<GameObject> GetGameObjectsFromRandomFolder(string baseFolderPath)
