@@ -20,16 +20,25 @@ public class PlayerBehavior : MonoBehaviour
 
     private GameObject _draggedObject;
     private Vector3 _dragOffset;
+    private Plane _dragPlane;
+    private bool _isStrawEquipped = false;
 
     private void Start()
-    { _camera = Camera.main; }
+    {
+        GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        _switchCamera = gameManager.GetComponent<SwitchCamera>();
+        _camera = Camera.main; 
+        _dragPlane = new Plane(Vector3.up, Vector3.zero);
+        
+        _isStrawEquipped = false;
+    }
 
     private void Update()
     {
-        if (_switchCamera.camera1.enabled)
+        if (_switchCamera.isCamera1)
         { _camera = _switchCamera.camera1; }
-
-        if (_switchCamera.camera2.enabled)
+        
+        else
         { _camera = _switchCamera.camera2; }
 
         if (Input.GetButtonDown("Fire1"))
@@ -47,13 +56,17 @@ public class PlayerBehavior : MonoBehaviour
                 else if (target.CompareTag("Straw"))
                 {
                     SelectStraw(target);
-                }
-                //if (ammo > 0)
-                else if (_ammo > 0)
-                {
-                    ShootBoba();
+                    
+                    if (_ammo > 0 && !_isStrawEquipped)
+                    {
+                        ShootBoba();
+                    }
                 }
             }
+        }
+        if (_draggedObject != null && Input.GetButton("Fire1"))
+        {
+            DragObject();
         }
 
         //drop
@@ -63,14 +76,13 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         //charge straw
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && _isStrawEquipped)
         {
             _ammo++;
             if (_ammo > _maxAmmo)
             {
                 _ammo = _maxAmmo;
                 Debug.Log("Max Ammo");
-                return;
             }
         }
     }
@@ -80,11 +92,25 @@ public class PlayerBehavior : MonoBehaviour
         _draggedObject = target;
         _dragOffset = target.transform.position - hitPoint;
     }
+    
+    private void DragObject()
+    {
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        float distanceToPlane;
+        
+        if (_dragPlane.Raycast(ray, out distanceToPlane))
+        {
+            Vector3 worldPosition = ray.GetPoint(distanceToPlane);
+            _draggedObject.transform.position = worldPosition + _dragOffset; 
+        }
+    }
+
 
 
     private void SelectStraw(GameObject straw)
     {
         Debug.Log($"Straw selected: {straw.name}");
+        _isStrawEquipped = true;
     }
 
 
