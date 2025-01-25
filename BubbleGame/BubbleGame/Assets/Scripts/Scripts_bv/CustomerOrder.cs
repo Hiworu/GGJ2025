@@ -15,12 +15,10 @@ public class CustomerOrder : MonoBehaviour
     [Header("Order")]
     [SerializeField] private float waitTime;
     
-    private BubbleTeaManager _bubbleTeaManager;
-    private GameManager _gameManager;
+    private GameManagerScript _gameManager;
     
     private bool _isOrderCompleted;
     private float _currentTime;
-   
     
     
     
@@ -28,21 +26,16 @@ public class CustomerOrder : MonoBehaviour
     {
         //get GameManager
         GameObject gameManager = GameObject.Find("GameManager");
-        _gameManager = gameManager.GetComponent<GameManager>();
-        _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
+        _gameManager = gameManager.GetComponent<GameManagerScript>();
         
         //RANDOMIZED INGREDIENTS IF LIST == NULL
         if (customer.Bubbles == null)       { customer.Bubbles = new List<BubbleSO>(); }
-
         if (customer.Bubbles == null || customer.Bubbles.Count == 0)
-        { customer.Bubbles.Add(RandomFromResources<BubbleSO>("Bubbles")); }
-
-        if (customer.Syrups == null) { customer.Syrups = new List<SyrupSO>(); }
-
+        { customer.Bubbles.Add(RandomFromResources<BubbleSO>("Bubbles")); }        
+        if (customer.Syrups == null)        { customer.Syrups = new List<SyrupSO>(); }
         if (customer.Syrups == null || customer.Syrups.Count == 0)
         { customer.Syrups.Add(RandomFromResources<SyrupSO>("Syrups")); }
         if (customer.Toppings == null)      { customer.Toppings = new List<ToppingSO>(); }
-
         if (customer.Toppings == null || customer.Toppings.Count == 0)
         { customer.Toppings.Add(RandomFromResources<ToppingSO>("Toppings")); }
     }
@@ -67,44 +60,52 @@ public class CustomerOrder : MonoBehaviour
         {
             //timer
             _currentTime += Time.deltaTime;
-
-            if (!_isOrderCompleted && CompareChoices())                     { _isOrderCompleted = true; }
             if (_isOrderCompleted == false && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
-            if (_isOrderCompleted )                                         { CustomerSatisfied(); }
+            if (_isOrderCompleted == true)                                  {CustomerDissatisfied();}
         }
         
     }
 
-    private bool CompareChoices()
-    {
-        if(!CompareLists(customer.Bubbles, _bubbleTeaManager.selectedBubbles))return false;
-        if(!CompareLists(customer.Syrups, _bubbleTeaManager.selectedSyrups))return false;
-        if(!CompareLists(customer.Toppings, _bubbleTeaManager.selectedToppings))return false;
-        
-        return true;
-    }
-
-    private bool CompareLists<T>(List<T> list1, List<T> list2) where T : Object
-    {
-        if (list1.Count != list2.Count) return false;
-        for (int i = 0; i < list1.Count; i++)
-        { if (list1[i] != (list2[i])) return false; }
-        return true;
-    }
-    
-    
     private void CustomerDissatisfied()
     {
-        _gameManager.Score -= 1;
+        _gameManager.Score = _gameManager.Score -1;
         Destroy(this.gameObject);
     }
 
     private void CustomerSatisfied()
     {
-        float prizeCash = Random.Range (5,50);
-        _gameManager.Score += 1;
-        _gameManager.Cash += Mathf.RoundToInt(prizeCash) ;
+        _gameManager.Score = _gameManager.Score + 1;
         Destroy(this.gameObject);
     }
-    
+
+    // Customer Behavior
+   //
+   // 1- GameObject gets instantiated
+   // 2- Customer bubble shows order
+   // 3- Customer waits x time
+   // 4- If Customer gets order ► customer drops x money
+   // 4- Else Customer leaves
+   //
+   // Needs:
+   // private bool isCorrectOrder = false;
+   // private float currentTimerTime;
+   // private float timerCustomer;
+  //______________________________
+  // Update()
+  // {
+  // currentTimerTime = timerCustomer-time.deltaTime
+  // if(currentTimerTime <=0)
+  // {
+  // CustomerLeaves();
+  // }
+  // }
+  //
+  // each of them selected at random.
+  //
+  // If given bubble tea's bubble, syrup and topping match the customer's order
+  // isCorrectOrder = true;
+  // player.cash = player.cash + customerPayment
+  //
+  // else
+  // Debug.Log("Wrong Order");
 }
