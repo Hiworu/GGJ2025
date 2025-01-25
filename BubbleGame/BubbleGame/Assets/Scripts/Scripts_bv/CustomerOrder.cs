@@ -15,7 +15,7 @@ public class CustomerOrder : MonoBehaviour
     [Header("Order")]
     [SerializeField] private float waitTime;
     
-    private GameManager _gameManager;
+    private GameManagerScript _gameManager;
     
     private bool _isOrderCompleted;
     private float _currentTime;
@@ -26,7 +26,7 @@ public class CustomerOrder : MonoBehaviour
     {
         //get GameManager
         GameObject gameManager = GameObject.Find("GameManager");
-        _gameManager = gameManager.GetComponent<GameManager>();
+        _gameManager = gameManager.GetComponent<GameManagerScript>();
         
         //RANDOMIZED INGREDIENTS IF LIST == NULL
         if (customer.Bubbles == null)       { customer.Bubbles = new List<BubbleSO>(); }
