@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: New Customer
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
-  toppings: []
-  bubbles: []
-  syrups: []
+  Toppings: []
+  Bubbles: []
+  Syrups: []

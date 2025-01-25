@@ -206,20 +206,20 @@ public class CreatorWindow : EditorWindow
       EditorGUILayout.BeginHorizontal();
       GUILayout.Label("Toppings:", GUILayout.Width(lengthWidth));
       EditorGUILayout.BeginVertical();
-      if (customerSelected.toppings == null) 
-      { customerSelected.toppings = new List<ToppingSO>(); }
+      if (customerSelected.Toppings == null) 
+      { customerSelected.Toppings = new List<ToppingSO>(); }
 
-      for (int i = 0; i < customerSelected.toppings.Count; i++)                                                      //show drops
+      for (int i = 0; i < customerSelected.Toppings.Count; i++)                                                      //show drops
       {
          EditorGUILayout.BeginHorizontal();
-         customerSelected.toppings[i] = 
+         customerSelected.Toppings[i] = 
             (ToppingSO)EditorGUILayout.ObjectField
-            (customerSelected.toppings[i], typeof(ToppingSO), false, 
+            (customerSelected.Toppings[i], typeof(ToppingSO), false, 
                GUILayout.Width(lengthWidth)
             );
          if (GUILayout.Button("X", GUILayout.Width((20))))
          {
-            customerSelected.toppings.RemoveAt(i);
+            customerSelected.Toppings.RemoveAt(i);
             i--; 
             continue;
          }
@@ -230,7 +230,7 @@ public class CreatorWindow : EditorWindow
       EditorGUILayout.Space(10);
       if (GUILayout.Button("Add", GUILayout.Width(lengthWidth)))
       {
-         customerSelected.toppings.Add(null);
+         customerSelected.Toppings.Add(null);
          EditorUtility.SetDirty(customerSelected);
       }
       GUILayout.Space(20);
@@ -239,20 +239,20 @@ public class CreatorWindow : EditorWindow
       EditorGUILayout.BeginHorizontal();
       GUILayout.Label("Bubbles:", GUILayout.Width(lengthWidth));
       EditorGUILayout.BeginVertical();
-      if (customerSelected.bubbles == null) 
-      { customerSelected.bubbles = new List<BubbleSO>(); }
+      if (customerSelected.Bubbles == null) 
+      { customerSelected.Bubbles = new List<BubbleSO>(); }
 
-      for (int i = 0; i < customerSelected.bubbles.Count; i++)                                                      //show drops
+      for (int i = 0; i < customerSelected.Bubbles.Count; i++)                                                      //show drops
       {
          EditorGUILayout.BeginHorizontal();
-         customerSelected.bubbles[i] = 
+         customerSelected.Bubbles[i] = 
             (BubbleSO)EditorGUILayout.ObjectField
-            (customerSelected.bubbles[i], typeof(BubbleSO), false, 
+            (customerSelected.Bubbles[i], typeof(BubbleSO), false, 
                GUILayout.Width(lengthWidth)
             );
          if (GUILayout.Button("X", GUILayout.Width((20))))
          {
-            customerSelected.bubbles.RemoveAt(i);
+            customerSelected.Bubbles.RemoveAt(i);
             i--; 
             continue;
          }
@@ -263,7 +263,7 @@ public class CreatorWindow : EditorWindow
       EditorGUILayout.Space(10);
       if (GUILayout.Button("Add", GUILayout.Width(lengthWidth)))
       {
-         customerSelected.bubbles.Add(null);
+         customerSelected.Bubbles.Add(null);
          EditorUtility.SetDirty(customerSelected);
       }
       GUILayout.Space(20);
@@ -272,20 +272,20 @@ public class CreatorWindow : EditorWindow
       EditorGUILayout.BeginHorizontal();
       GUILayout.Label("Syrups:", GUILayout.Width(lengthWidth));
       EditorGUILayout.BeginVertical();
-      if (customerSelected.syrups == null) 
-      { customerSelected.syrups = new List<SyrupSO>(); }
+      if (customerSelected.Syrups == null) 
+      { customerSelected.Syrups = new List<SyrupSO>(); }
 
-      for (int i = 0; i < customerSelected.syrups.Count; i++)                                                      //show drops
+      for (int i = 0; i < customerSelected.Syrups.Count; i++)                                                      //show drops
       {
          EditorGUILayout.BeginHorizontal();
-         customerSelected.syrups[i] = 
+         customerSelected.Syrups[i] = 
             (SyrupSO)EditorGUILayout.ObjectField
-            (customerSelected.syrups[i], typeof(SyrupSO), false, 
+            (customerSelected.Syrups[i], typeof(SyrupSO), false, 
                GUILayout.Width(lengthWidth)
             );
          if (GUILayout.Button("X", GUILayout.Width((20))))
          {
-            customerSelected.syrups.RemoveAt(i);
+            customerSelected.Syrups.RemoveAt(i);
             i--; 
             continue;
          }
@@ -296,7 +296,7 @@ public class CreatorWindow : EditorWindow
       EditorGUILayout.Space(10);
       if (GUILayout.Button("Add", GUILayout.Width(lengthWidth)))
       {
-         customerSelected.syrups.Add(null);
+         customerSelected.Syrups.Add(null);
          EditorUtility.SetDirty(customerSelected);
       }
       GUILayout.Space(20);
