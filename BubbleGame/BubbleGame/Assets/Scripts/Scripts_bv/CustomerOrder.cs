@@ -98,7 +98,8 @@ public class CustomerOrder : MonoBehaviour
     
     private void CustomerDissatisfied()
     {
-        _gameManager.playerHealth -= -1;
+        _gameManager.playerHealth -= 1;
+        Debug.Log($"Current health: {_gameManager.playerHealth}");
         _waveManager.removeCustomer(this.gameObject);
         Debug.Log($"customer removed:{this.gameObject.name}");
     }

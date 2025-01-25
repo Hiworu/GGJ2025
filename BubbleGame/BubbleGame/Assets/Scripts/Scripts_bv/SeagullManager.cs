@@ -26,11 +26,13 @@ public class SeagullManager : MonoBehaviour
 
    private GameObject _activeSeagull;
    private WaveManagerScript _waveManager;
+   private GameManagerScript _gameManager;
    
    private void Start()
    {
       GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
       _waveManager = gameManager.GetComponent<WaveManagerScript>();
+      _gameManager = gameManager.GetComponent<GameManagerScript>();
       
       _currentTime = 0f;
       _currentSeagullSpawnTime = 0;
@@ -101,6 +103,8 @@ public class SeagullManager : MonoBehaviour
       {
          GameObject firstCustomer = _waveManager.customers[0];
          _waveManager.removeCustomer(firstCustomer);
+         _gameManager.playerHealth -= 1;
+         Debug.Log($"Current health: {_gameManager.playerHealth}");
       }
       ResetSeagull();
    }
