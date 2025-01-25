@@ -274,6 +274,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!1 &460586702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 460586703}
+  m_Layer: 0
+  m_Name: SpawnTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &460586703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460586702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.2, y: -8.607076, z: 19.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &462664115
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +706,8 @@ MonoBehaviour:
   waveCounter: 0
   customers: []
   activeTimers: 0
+  spawnTransform: {fileID: 460586703}
+  customerPrefab: {fileID: 4448838479570451255, guid: 62e5c873ec3fdd947943f0a10a1ebd04, type: 3}
 --- !u!1 &1999075565
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,3 +814,4 @@ SceneRoots:
   - {fileID: 462664117}
   - {fileID: 1561559156}
   - {fileID: 104741811}
+  - {fileID: 460586703}
