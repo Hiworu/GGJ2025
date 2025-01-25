@@ -46,3 +46,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Outline
+    uniqueID: 3228944451
+    locked: 0
+  - name: Pose
+    uniqueID: 2324178047
+    locked: 0
+  - name: Hair
+    uniqueID: 1018696973
+    locked: 0
+  - name: Clothes
+    uniqueID: 1659973089
+    locked: 0
