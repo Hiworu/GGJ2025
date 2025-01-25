@@ -17,9 +17,12 @@ public class CustomerOrder : MonoBehaviour
     
     private GameManagerScript _gameManager;
     private BubbleTeaManager _bubbleTeaManager;
+    private SeagullManager _seagullManager;
     
+
     private bool _isOrderCompleted;
     private float _currentTime;
+    private float _currentSeagullTime;
     
     
     
@@ -29,6 +32,7 @@ public class CustomerOrder : MonoBehaviour
         GameObject gameManager = GameObject.Find("GameManager");
         _gameManager = gameManager.GetComponent<GameManagerScript>();
         _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
+        _seagullManager = gameManager.GetComponent<SeagullManager>();
         
         //RANDOMIZED INGREDIENTS IF LIST == NULL
         if (customer.Bubbles == null)       { customer.Bubbles = new List<BubbleSO>(); }
@@ -63,8 +67,12 @@ public class CustomerOrder : MonoBehaviour
             //timer
             _currentTime += Time.deltaTime;
             if (CompareChoices()) {_isOrderCompleted = true;}
-            if (_isOrderCompleted == false && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
-            if (_isOrderCompleted == true)                                  {CustomerSatisfied();}
+            
+            if (!_isOrderCompleted && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
+            if (_seagullManager.IsAttackedBySeagull && _seagullManager.SeagullHasWon)
+            { CustomerDissatisfied(); return; }
+            
+            if (_isOrderCompleted == true)                          { CustomerSatisfied(); }
         }
         
     }
