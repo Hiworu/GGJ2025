@@ -29,6 +29,7 @@ public class SwitchCamera :  MonoBehaviour
         {
             Switch(2);
         }
+
     }
         void Switch(int cameravalue)
     {
