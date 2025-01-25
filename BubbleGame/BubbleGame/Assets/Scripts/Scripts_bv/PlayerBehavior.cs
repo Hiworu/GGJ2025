@@ -107,8 +107,8 @@ public class PlayerBehavior : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             RaycastHit hit;
-            Vector3 direction = boba.GetComponent<Rigidbody>().velocity.normalized; // Direction of boba's movement
-            if (Physics.Raycast(boba.transform.position, direction, out hit, 0.5f)) // Adjust the range as needed
+            Vector3 direction = boba.GetComponent<Rigidbody>().velocity.normalized;
+            if (Physics.Raycast(boba.transform.position, direction, out hit, Mathf.Infinity)) 
             {
                 Transform hitObject = hit.collider.gameObject.transform;
 

@@ -87,13 +87,13 @@ public class CustomerOrder : MonoBehaviour
     
     private void CustomerDissatisfied()
     {
-        _gameManager.Score = _gameManager.Score -1;
+        _gameManager.PlayerHealth -= -1;
         Destroy(this.gameObject);
     }
 
     private void CustomerSatisfied()
     {
-        _gameManager.Score = _gameManager.Score + 1;
+        _gameManager.Cash += customer.CashGiven;
         Destroy(this.gameObject);
     }
     
