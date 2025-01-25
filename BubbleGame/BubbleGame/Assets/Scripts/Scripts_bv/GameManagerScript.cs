@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
-    [NonSerialized] public int PlayerHealth;
-    [NonSerialized] public int Cash;
+    public int playerHealth;
+    public int cash;
+    public int customerWaitTime = 40;
 
     private void Start()
     {
-        Cash = 0;
-        PlayerHealth = 0;
+        cash = 0;
+        playerHealth = 0;
     }
 }
