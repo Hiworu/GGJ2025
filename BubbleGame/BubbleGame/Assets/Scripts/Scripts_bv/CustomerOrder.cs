@@ -11,12 +11,16 @@ public class CustomerOrder : MonoBehaviour
 {
     [Header ("Customer")]
     [SerializeField] private CustomerSO customer;
+
+    [Header("Order")]
+    [SerializeField] private float waitTime = 10;
     
     private GameManagerScript _gameManager;
     private BubbleTeaManager _bubbleTeaManager;
     private SeagullManager _seagullManager;
     private WaveManagerScript _waveManager;
-    
+    public GameObject hair;
+    public GameObject body;
     
 
     private bool _isOrderCompleted;
@@ -68,7 +72,7 @@ public class CustomerOrder : MonoBehaviour
             _currentTime += Time.deltaTime;
             if (CompareChoices()) {_isOrderCompleted = true;}
             
-            if (!_isOrderCompleted && _currentTime >= _gameManager.customerWaitTime)     { CustomerDissatisfied(); return;}
+            if (!_isOrderCompleted && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
             if (_seagullManager.IsAttackedBySeagull && _seagullManager.SeagullHasWon)
             {
                 Debug.Log("gabbiano ha vinto :(");
@@ -99,16 +103,40 @@ public class CustomerOrder : MonoBehaviour
     
     private void CustomerDissatisfied()
     {
-        _gameManager.playerHealth -= 1;
-        Debug.Log($"Current health: {_gameManager.playerHealth}");
+        _gameManager.PlayerHealth -= -1;
         _waveManager.removeCustomer(this.gameObject);
         Debug.Log($"customer removed:{this.gameObject.name}");
     }
 
     private void CustomerSatisfied()
     {
-        _gameManager.cash += customer.CashGiven;
+        _gameManager.Cash += customer.CashGiven;
         _waveManager.removeCustomer(this.gameObject);
     }
+
+    private void AddChildren()
+    {
+        // Crea il primo figlio
+
+        GameObject child1 = Instantiate(hair, Vector3.zero, Quaternion.identity);
+         child1.transform.SetParent(this.transform); // Assegna come figlio
+ /*        child1.transform.localPosition = ; // Imposta la posizione locale
+        child1.transform.localRotation = Quaternion.identity; // Imposta la rotazione locale
+        child1.transform.localScale = Vector3.one; // Imposta la scala locale */ 
+
+        // Aggiungi componenti o configurazioni al primo figlio, se necessario
+        // Esempio: child1.AddComponent<SpriteRenderer>();
+
+        // Crea il secondo figlio
+        //child2 = new GameObject("Child2");
+/*         child2.transform.SetParent(this.transform); // Assegna come figlio
+        child2.transform.localPosition = new Vector3(1, 0, 0); // Imposta la posizione locale (esempio: 1 unità a destra)
+        child2.transform.localRotation = Quaternion.identity; // Imposta la rotazione locale
+        child2.transform.localScale = Vector3.one; // Imposta la scala locale */
+
+        // Aggiungi componenti o configurazioni al secondo figlio, se necessario
+        // Esempio: child2.AddComponent<BoxCollider>();
+    }
+
     
 }
