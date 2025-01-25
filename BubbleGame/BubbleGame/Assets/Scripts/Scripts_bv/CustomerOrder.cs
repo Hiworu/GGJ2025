@@ -13,7 +13,7 @@ public class CustomerOrder : MonoBehaviour
     [SerializeField] private CustomerSO customer;
 
     [Header("Order")]
-    [SerializeField] private float waitTime;
+    [SerializeField] private float waitTime = 10;
     
     private GameManagerScript _gameManager;
     private BubbleTeaManager _bubbleTeaManager;
