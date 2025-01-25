@@ -188,7 +188,7 @@ public class CreatorWindow : EditorWindow
       currentName = customerSelected.name;
       currentIcon = customerSelected.sprite;
 
-      EditorGUILayout.LabelField("Book Details", EditorStyles.boldLabel);
+      EditorGUILayout.LabelField("Customer Details", EditorStyles.boldLabel);
       
       //NAME
       GUILayout.BeginHorizontal();
@@ -310,7 +310,7 @@ public class CreatorWindow : EditorWindow
                 GUILayout.Height(EditorGUIUtility.currentViewWidth/6)))
          {
             string path = EditorUtility.OpenFilePanel
-               ("Select Sprite", "Assets/Resources/Sprites", "png,jpg,asset");                      
+               ("Select Sprite", "Assets/Resources/Imports/PNGs", "png,jpg,asset");                      
             if (!string.IsNullOrEmpty(path))                                                                            //convert to asset path
             {
                string assetPath = FileUtil.GetProjectRelativePath(path);
@@ -327,7 +327,7 @@ public class CreatorWindow : EditorWindow
                   GUILayout.Height(EditorGUIUtility.currentViewWidth/6)))
       {
          string path = EditorUtility.OpenFilePanel
-            ("Select Sprite", "Assets/Resources/Sprites", "png,jpg,asset");
+            ("Select Sprite", "Assets/Resources/Imports/PNGs", "png,jpg,asset");
          if (!string.IsNullOrEmpty(path))                                                                               //convert to asset path
          {
             string assetPath = FileUtil.GetProjectRelativePath(path);
@@ -372,33 +372,36 @@ public class CreatorWindow : EditorWindow
       var sprite = bubbleSelected.sprite;
       if (sprite == null)
       {
-         if (GUILayout.Button("Select Sprite", GUILayout.Width(EditorGUIUtility.currentViewWidth/6), 
+         if (GUILayout.Button("Select Sprite", GUILayout.Width(EditorGUIUtility.currentViewWidth/6),
                 GUILayout.Height(EditorGUIUtility.currentViewWidth/6)))
          {
             string path = EditorUtility.OpenFilePanel
-               ("Select Sprite", "Assets/Resources/Sprites", "png,jpg,asset");
+               ("Select Sprite", "Assets/Resources/Imports/PNGs", "png,jpg,asset");                      
             if (!string.IsNullOrEmpty(path))                                                                            //convert to asset path
             {
                string assetPath = FileUtil.GetProjectRelativePath(path);
                Sprite selectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
-               if (selectedSprite != null) { newIcon = selectedSprite; }
+               if (selectedSprite != null)
+               {
+                  newIcon = selectedSprite;
+               }
             }
          }
       }
-      else if (GUILayout.Button(new GUIContent(sprite.texture), 
-                  GUILayout.Width(EditorGUIUtility.currentViewWidth/6), 
+      else if (GUILayout.Button(new GUIContent(sprite.texture),
+                  GUILayout.Width(EditorGUIUtility.currentViewWidth/6),
                   GUILayout.Height(EditorGUIUtility.currentViewWidth/6)))
       {
          string path = EditorUtility.OpenFilePanel
-            ("Select Sprite", "Assets/Resources/Sprites", "png,jpg,asset");
+            ("Select Sprite", "Assets/Resources/Imports/PNGs", "png,jpg,asset");
          if (!string.IsNullOrEmpty(path))                                                                               //convert to asset path
          {
             string assetPath = FileUtil.GetProjectRelativePath(path);
             Sprite selectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
             if (selectedSprite != null)
             {
-               bubbleSelected.sprite = selectedSprite;
-               EditorUtility.SetDirty(bubbleSelected);
+               customerSelected.sprite = selectedSprite;
+               EditorUtility.SetDirty(customerSelected);
             }
          }
       }
@@ -434,33 +437,36 @@ public class CreatorWindow : EditorWindow
       var sprite = syrupSelected.sprite;
       if (sprite == null)
       {
-         if (GUILayout.Button("Select Sprite", GUILayout.Width(EditorGUIUtility.currentViewWidth/6), 
+         if (GUILayout.Button("Select Sprite", GUILayout.Width(EditorGUIUtility.currentViewWidth/6),
                 GUILayout.Height(EditorGUIUtility.currentViewWidth/6)))
          {
             string path = EditorUtility.OpenFilePanel
-               ("Select Sprite", "Assets/Resources/Sprites", "png,jpg,asset");
+               ("Select Sprite", "Assets/Resources/Imports/PNGs", "png,jpg,asset");                      
             if (!string.IsNullOrEmpty(path))                                                                            //convert to asset path
             {
                string assetPath = FileUtil.GetProjectRelativePath(path);
                Sprite selectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
-               if (selectedSprite != null) { newIcon = selectedSprite; }
+               if (selectedSprite != null)
+               {
+                  newIcon = selectedSprite;
+               }
             }
          }
       }
-      else if (GUILayout.Button(new GUIContent(sprite.texture), 
-                  GUILayout.Width(EditorGUIUtility.currentViewWidth/6), 
+      else if (GUILayout.Button(new GUIContent(sprite.texture),
+                  GUILayout.Width(EditorGUIUtility.currentViewWidth/6),
                   GUILayout.Height(EditorGUIUtility.currentViewWidth/6)))
       {
          string path = EditorUtility.OpenFilePanel
-            ("Select Sprite", "Assets/Resources/Sprites", "png,jpg,asset");
+            ("Select Sprite", "Assets/Resources/Imports/PNGs", "png,jpg,asset");
          if (!string.IsNullOrEmpty(path))                                                                               //convert to asset path
          {
             string assetPath = FileUtil.GetProjectRelativePath(path);
             Sprite selectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
             if (selectedSprite != null)
             {
-               syrupSelected.sprite = selectedSprite;
-               EditorUtility.SetDirty(syrupSelected);
+               customerSelected.sprite = selectedSprite;
+               EditorUtility.SetDirty(customerSelected);
             }
          }
       }
@@ -496,33 +502,36 @@ public class CreatorWindow : EditorWindow
       var sprite = toppingSelected.sprite;
       if (sprite == null)
       {
-         if (GUILayout.Button("Select Sprite", GUILayout.Width(EditorGUIUtility.currentViewWidth/6), 
+         if (GUILayout.Button("Select Sprite", GUILayout.Width(EditorGUIUtility.currentViewWidth/6),
                 GUILayout.Height(EditorGUIUtility.currentViewWidth/6)))
          {
             string path = EditorUtility.OpenFilePanel
-               ("Select Sprite", "Assets/Resources/Sprites", "png,jpg,asset");
+               ("Select Sprite", "Assets/Resources/Imports/PNGs", "png,jpg,asset");                      
             if (!string.IsNullOrEmpty(path))                                                                            //convert to asset path
             {
                string assetPath = FileUtil.GetProjectRelativePath(path);
                Sprite selectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
-               if (selectedSprite != null) { newIcon = selectedSprite; }
+               if (selectedSprite != null)
+               {
+                  newIcon = selectedSprite;
+               }
             }
          }
       }
-      else if (GUILayout.Button(new GUIContent(sprite.texture), 
-                  GUILayout.Width(EditorGUIUtility.currentViewWidth/6), 
+      else if (GUILayout.Button(new GUIContent(sprite.texture),
+                  GUILayout.Width(EditorGUIUtility.currentViewWidth/6),
                   GUILayout.Height(EditorGUIUtility.currentViewWidth/6)))
       {
          string path = EditorUtility.OpenFilePanel
-            ("Select Sprite", "Assets/Resources/Sprites", "png,jpg,asset");
+            ("Select Sprite", "Assets/Resources/Imports/PNGs", "png,jpg,asset");
          if (!string.IsNullOrEmpty(path))                                                                               //convert to asset path
          {
             string assetPath = FileUtil.GetProjectRelativePath(path);
             Sprite selectedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
             if (selectedSprite != null)
             {
-               toppingSelected.sprite = selectedSprite;
-               EditorUtility.SetDirty(toppingSelected);
+               customerSelected.sprite = selectedSprite;
+               EditorUtility.SetDirty(customerSelected);
             }
          }
       }
