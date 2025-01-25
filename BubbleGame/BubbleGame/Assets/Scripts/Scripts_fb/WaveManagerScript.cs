@@ -7,11 +7,11 @@ public class WaveManagerScript : MonoBehaviour
     public float[][] waves = new float[][]
     {
         new float[] { 0f, 2f, 4f },
-/*         new float[] { 0f, 0f, 0f },
+        new float[] { 0f, 0f, 0f },
         new float[] { 1f },
         new float[] { 3f, 3f, 3f },
         new float[] { 2f, 3f, 4f },
-        new float[] { 0f, 0f, 4f , 4f} */
+        new float[] { 0f, 0f, 4f , 4f}
     };
     public int waveCounter = 0;
     public List<GameObject> customers;
