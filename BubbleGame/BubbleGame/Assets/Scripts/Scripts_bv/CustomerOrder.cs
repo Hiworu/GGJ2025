@@ -25,6 +25,7 @@ public class CustomerOrder : MonoBehaviour
     private bool _isOrderCompleted;
     private float _currentTime;
     private float _currentSeagullTime;
+    private SpriteRenderer spriteRenderer;
 
 
 
@@ -61,6 +62,7 @@ public class CustomerOrder : MonoBehaviour
     {
         _currentTime = 0;
         _isOrderCompleted = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         AddTextures();
     }
 
@@ -122,7 +124,8 @@ public class CustomerOrder : MonoBehaviour
         GameObject hair = customerStyles[1];
         Debug.Log(hair);
 
-        
+
+
 
         if (body != null && hair != null)
         {
@@ -132,6 +135,15 @@ public class CustomerOrder : MonoBehaviour
 
             GameObject hairClone = Instantiate(hair, this.transform.position, Quaternion.identity);
             hairClone.transform.SetParent(this.transform); // Imposta this come genitore
+            GameObject hairChild = hairClone.transform.Find("Hair").gameObject;
+            Debug.Log(hair);
+            spriteRenderer = hairChild.GetComponent<SpriteRenderer>();
+            float r = Random.Range(0f, 1f); // Valore casuale per il rosso
+            float g = Random.Range(0f, 1f); // Valore casuale per il verde
+            float b = Random.Range(0f, 1f); // Valore casuale per il blu
+
+            Color randomColor = new Color(r, g, b);
+            spriteRenderer.color = randomColor;
             Debug.Log("Hair aggiunto come figlio: " + hair.name);
         }
         else
