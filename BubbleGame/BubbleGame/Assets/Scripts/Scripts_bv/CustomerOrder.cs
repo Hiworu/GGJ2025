@@ -64,7 +64,7 @@ public class CustomerOrder : MonoBehaviour
             _currentTime += Time.deltaTime;
             if (CompareChoices()) {_isOrderCompleted = true;}
             if (_isOrderCompleted == false && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
-            if (_isOrderCompleted == true)                                  {CustomerDissatisfied();}
+            if (_isOrderCompleted == true)                                  {CustomerSatisfied();}
         }
         
     }
@@ -96,35 +96,5 @@ public class CustomerOrder : MonoBehaviour
         _gameManager.Score = _gameManager.Score + 1;
         Destroy(this.gameObject);
     }
-
-    // Customer Behavior
-   //
-   // 1- GameObject gets instantiated
-   // 2- Customer bubble shows order
-   // 3- Customer waits x time
-   // 4- If Customer gets order ► customer drops x money
-   // 4- Else Customer leaves
-   //
-   // Needs:
-   // private bool isCorrectOrder = false;
-   // private float currentTimerTime;
-   // private float timerCustomer;
-  //______________________________
-  // Update()
-  // {
-  // currentTimerTime = timerCustomer-time.deltaTime
-  // if(currentTimerTime <=0)
-  // {
-  // CustomerLeaves();
-  // }
-  // }
-  //
-  // each of them selected at random.
-  //
-  // If given bubble tea's bubble, syrup and topping match the customer's order
-  // isCorrectOrder = true;
-  // player.cash = player.cash + customerPayment
-  //
-  // else
-  // Debug.Log("Wrong Order");
+    
 }
