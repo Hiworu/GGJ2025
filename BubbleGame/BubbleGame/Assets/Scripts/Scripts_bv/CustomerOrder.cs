@@ -20,6 +20,7 @@ public class CustomerOrder : MonoBehaviour
     private SeagullManager _seagullManager;
     private WaveManagerScript _waveManager;
     
+    
 
     private bool _isOrderCompleted;
     private float _currentTime;
