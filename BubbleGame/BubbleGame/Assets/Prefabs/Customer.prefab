@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customer: {fileID: 11400000, guid: b15f09e4c2a55fc4cb6bdaa49082133a, type: 2}
-  waitTime: 0
+  waitTime: 10

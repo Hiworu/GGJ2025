@@ -65,5 +65,9 @@ public class WaveManagerScript : MonoBehaviour
     }
 
 
-
+    public void removeCustomer(GameObject customer)
+    {
+        customers.Remove(customer);
+        Destroy(customer);
+    }
 }
