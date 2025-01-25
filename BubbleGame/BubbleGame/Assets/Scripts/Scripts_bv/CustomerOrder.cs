@@ -6,29 +6,28 @@ using UnityEditor.Build.Content;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
+using System.IO;
 
 public class CustomerOrder : MonoBehaviour
 {
-    [Header ("Customer")]
+    [Header("Customer")]
     [SerializeField] private CustomerSO customer;
 
     [Header("Order")]
     [SerializeField] private float waitTime = 10;
-    
+
     private GameManagerScript _gameManager;
     private BubbleTeaManager _bubbleTeaManager;
     private SeagullManager _seagullManager;
     private WaveManagerScript _waveManager;
-    public GameObject hair;
-    public GameObject body;
-    
+
 
     private bool _isOrderCompleted;
     private float _currentTime;
     private float _currentSeagullTime;
-    
-    
-    
+
+
+
     private void Awake()
     {
         //get GameManager
@@ -39,13 +38,13 @@ public class CustomerOrder : MonoBehaviour
         _waveManager = gameManager.GetComponent<WaveManagerScript>();
 
         //RANDOMIZED INGREDIENTS IF LIST == NULL
-        if (customer.Bubbles == null)       { customer.Bubbles = new List<BubbleSO>(); }
+        if (customer.Bubbles == null) { customer.Bubbles = new List<BubbleSO>(); }
         if (customer.Bubbles == null || customer.Bubbles.Count == 0)
-        { customer.Bubbles.Add(RandomFromResources<BubbleSO>("Bubbles")); }        
-        if (customer.Syrups == null)        { customer.Syrups = new List<SyrupSO>(); }
+        { customer.Bubbles.Add(RandomFromResources<BubbleSO>("Bubbles")); }
+        if (customer.Syrups == null) { customer.Syrups = new List<SyrupSO>(); }
         if (customer.Syrups == null || customer.Syrups.Count == 0)
         { customer.Syrups.Add(RandomFromResources<SyrupSO>("Syrups")); }
-        if (customer.Toppings == null)      { customer.Toppings = new List<ToppingSO>(); }
+        if (customer.Toppings == null) { customer.Toppings = new List<ToppingSO>(); }
         if (customer.Toppings == null || customer.Toppings.Count == 0)
         { customer.Toppings.Add(RandomFromResources<ToppingSO>("Toppings")); }
     }
@@ -62,6 +61,7 @@ public class CustomerOrder : MonoBehaviour
     {
         _currentTime = 0;
         _isOrderCompleted = false;
+        AddTextures();
     }
 
     private void Update()
@@ -70,19 +70,19 @@ public class CustomerOrder : MonoBehaviour
         {
             //timer
             _currentTime += Time.deltaTime;
-            if (CompareChoices()) {_isOrderCompleted = true;}
-            
-            if (!_isOrderCompleted && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
+            if (CompareChoices()) { _isOrderCompleted = true; }
+
+            if (!_isOrderCompleted && _currentTime >= waitTime) { CustomerDissatisfied(); return; }
             if (_seagullManager.IsAttackedBySeagull && _seagullManager.SeagullHasWon)
             {
                 Debug.Log("gabbiano ha vinto :(");
                 CustomerDissatisfied();
                 return;
             }
-            
-            if (_isOrderCompleted == true)                          { CustomerSatisfied(); }
+
+            if (_isOrderCompleted == true) { CustomerSatisfied(); }
         }
-        
+
     }
 
     private bool CompareChoices()
@@ -100,43 +100,84 @@ public class CustomerOrder : MonoBehaviour
         { if (list1[i] != list2[i]) return false; }
         return true;
     }
-    
+
     private void CustomerDissatisfied()
     {
-        _gameManager.PlayerHealth -= -1;
+        _gameManager.playerHealth -= -1;
         _waveManager.removeCustomer(this.gameObject);
         Debug.Log($"customer removed:{this.gameObject.name}");
     }
 
     private void CustomerSatisfied()
     {
-        _gameManager.Cash += customer.CashGiven;
+        _gameManager.cash += customer.CashGiven;
         _waveManager.removeCustomer(this.gameObject);
     }
 
-    private void AddChildren()
+    private void AddTextures()
     {
-        // Crea il primo figlio
+        List<GameObject> customerStyles = GetGameObjectsFromRandomFolder("Prefabs/CustomerFeatures");
+        GameObject body = customerStyles[0];
+        Debug.Log(body);
+        GameObject hair = customerStyles[1];
+        Debug.Log(hair);
 
-        GameObject child1 = Instantiate(hair, Vector3.zero, Quaternion.identity);
-         child1.transform.SetParent(this.transform); // Assegna come figlio
- /*        child1.transform.localPosition = ; // Imposta la posizione locale
-        child1.transform.localRotation = Quaternion.identity; // Imposta la rotazione locale
-        child1.transform.localScale = Vector3.one; // Imposta la scala locale */ 
+        
 
-        // Aggiungi componenti o configurazioni al primo figlio, se necessario
-        // Esempio: child1.AddComponent<SpriteRenderer>();
+        if (body != null && hair != null)
+        {
+            GameObject bodyClone = Instantiate(body, this.transform.position , Quaternion.identity);
+            bodyClone.transform.SetParent(this.transform); // Imposta this come genitore
+            Debug.Log("Body aggiunto come figlio: " + body.name);
 
-        // Crea il secondo figlio
-        //child2 = new GameObject("Child2");
-/*         child2.transform.SetParent(this.transform); // Assegna come figlio
-        child2.transform.localPosition = new Vector3(1, 0, 0); // Imposta la posizione locale (esempio: 1 unità a destra)
-        child2.transform.localRotation = Quaternion.identity; // Imposta la rotazione locale
-        child2.transform.localScale = Vector3.one; // Imposta la scala locale */
+            GameObject hairClone = Instantiate(hair, this.transform.position, Quaternion.identity);
+            hairClone.transform.SetParent(this.transform); // Imposta this come genitore
+            Debug.Log("Hair aggiunto come figlio: " + hair.name);
+        }
+        else
+        {
+            Debug.LogWarning("Impossibile aggiungere body o hair come figli: uno o entrambi non sono stati trovati.");
+        }
 
-        // Aggiungi componenti o configurazioni al secondo figlio, se necessario
-        // Esempio: child2.AddComponent<BoxCollider>();
     }
 
-    
+ public List<GameObject> GetGameObjectsFromRandomFolder(string baseFolderPath)
+{
+    // Ottieni tutte le sottocartelle nel percorso base (relativo a Resources)
+    string resourcesPath = Path.Combine(Application.dataPath, "Resources", baseFolderPath);
+    string[] subFolders = Directory.GetDirectories(resourcesPath);
+
+    if (subFolders.Length > 0)
+    {
+        // Scegli una cartella casuale
+        int randomIndex = Random.Range(0, subFolders.Length);
+        string randomFolder = subFolders[randomIndex];
+
+        // Ottieni il nome della cartella (ad esempio, "Type1")
+        string folderName = Path.GetFileName(randomFolder);
+
+        // Costruisci il percorso relativo a Resources
+        string relativePath = Path.Combine(baseFolderPath, folderName);
+
+        // Carica tutti i GameObject dalla cartella casuale
+        GameObject[] gameObjects = Resources.LoadAll<GameObject>(relativePath);
+
+        if (gameObjects.Length > 0)
+        {
+            // Converti l'array in una lista e restituiscila
+            return new List<GameObject>(gameObjects);
+        }
+        else
+        {
+            Debug.LogWarning($"Nessun GameObject trovato nella cartella: {relativePath}");
+            return null;
+        }
+    }
+    else
+    {
+        Debug.LogWarning($"Nessuna sottocartella trovata nel percorso: {baseFolderPath}");
+        return null;
+    }
+}
+
 }
