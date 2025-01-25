@@ -14,8 +14,10 @@ public class WaveManagerScript : MonoBehaviour
         new float[] { 0f, 0f, 4f, 4f }
     };
     public int waveCounter = 0;
-    public CustomerSO[] customers;
+    public List<GameObject> customers;
     public int activeTimers = 0;
+    public Transform spawnTransform;
+    public GameObject customerPrefab;
 
     void Start()
     {
@@ -26,7 +28,7 @@ public class WaveManagerScript : MonoBehaviour
     void Update()
     {
         
-        if (customers.Length == 0&&activeTimers ==0)
+        if (customers.Count == 0 && activeTimers == 0)
         {
             Debug.Log("Nuova wave");
             foreach (float timer in waves[waveCounter])
@@ -36,6 +38,7 @@ public class WaveManagerScript : MonoBehaviour
                     StartCoroutine(StartTimer(timer));
                 }else{
                     Debug.Log("timer-->"+timer);
+                    InstantiateCustomer(); // Istanzia il prefab
                 }
             }
             waveCounter++;
@@ -46,7 +49,25 @@ public class WaveManagerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         Debug.Log("timer-->"+duration);
+        InstantiateCustomer(); // Istanzia il prefab
         activeTimers--;
     }
+    void InstantiateCustomer()
+    {
+        // Istanzia il prefabn
+        Vector3 spawnPosition = spawnTransform.position;
+        GameObject newCustomer = Instantiate(customerPrefab, spawnPosition, Quaternion.identity);
+        customers.Add(newCustomer);
+        Debug.Log("Customer instantiated. Total customers: " + customers.Count);
 
+        // Log the position of the new customer
+        Debug.Log("New customer position: " + newCustomer.transform.position);
+    }
+
+
+    public void removeCustomer(GameObject customer)
+    {
+        customers.Remove(customer);
+        Destroy(customer);
+    }
 }

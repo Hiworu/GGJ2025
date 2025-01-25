@@ -18,6 +18,7 @@ public class CustomerOrder : MonoBehaviour
     private GameManagerScript _gameManager;
     private BubbleTeaManager _bubbleTeaManager;
     private SeagullManager _seagullManager;
+    private WaveManagerScript _waveManager;
     
 
     private bool _isOrderCompleted;
@@ -33,7 +34,8 @@ public class CustomerOrder : MonoBehaviour
         _gameManager = gameManager.GetComponent<GameManagerScript>();
         _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
         _seagullManager = gameManager.GetComponent<SeagullManager>();
-        
+        _waveManager = gameManager.GetComponent<WaveManagerScript>();
+
         //RANDOMIZED INGREDIENTS IF LIST == NULL
         if (customer.Bubbles == null)       { customer.Bubbles = new List<BubbleSO>(); }
         if (customer.Bubbles == null || customer.Bubbles.Count == 0)
@@ -70,7 +72,11 @@ public class CustomerOrder : MonoBehaviour
             
             if (!_isOrderCompleted && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
             if (_seagullManager.IsAttackedBySeagull && _seagullManager.SeagullHasWon)
-            { CustomerDissatisfied(); return; }
+            {
+                Debug.Log("gabbiano ha vinto :(");
+                CustomerDissatisfied();
+                return;
+            }
             
             if (_isOrderCompleted == true)                          { CustomerSatisfied(); }
         }
@@ -96,13 +102,14 @@ public class CustomerOrder : MonoBehaviour
     private void CustomerDissatisfied()
     {
         _gameManager.PlayerHealth -= -1;
-        Destroy(this.gameObject);
+        _waveManager.removeCustomer(this.gameObject);
+        Debug.Log($"customer removed:{this.gameObject.name}");
     }
 
     private void CustomerSatisfied()
     {
         _gameManager.Cash += customer.CashGiven;
-        Destroy(this.gameObject);
+        _waveManager.removeCustomer(this.gameObject);
     }
     
 }
