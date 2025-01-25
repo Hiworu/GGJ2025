@@ -16,6 +16,7 @@ public class CustomerOrder : MonoBehaviour
     [SerializeField] private float waitTime;
     
     private GameManagerScript _gameManager;
+    private BubbleTeaManager _bubbleTeaManager;
     
     private bool _isOrderCompleted;
     private float _currentTime;
@@ -27,6 +28,7 @@ public class CustomerOrder : MonoBehaviour
         //get GameManager
         GameObject gameManager = GameObject.Find("GameManager");
         _gameManager = gameManager.GetComponent<GameManagerScript>();
+        _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
         
         //RANDOMIZED INGREDIENTS IF LIST == NULL
         if (customer.Bubbles == null)       { customer.Bubbles = new List<BubbleSO>(); }
@@ -60,12 +62,29 @@ public class CustomerOrder : MonoBehaviour
         {
             //timer
             _currentTime += Time.deltaTime;
+            if (CompareChoices()) {_isOrderCompleted = true;}
             if (_isOrderCompleted == false && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
             if (_isOrderCompleted == true)                                  {CustomerDissatisfied();}
         }
         
     }
 
+    private bool CompareChoices()
+    {
+        if (!CompareLists(customer.Bubbles, _bubbleTeaManager.selectedBubbles)) return false;
+        if (!CompareLists(customer.Syrups, _bubbleTeaManager.selectedSyrups)) return false;
+        if (!CompareLists(customer.Toppings, _bubbleTeaManager.selectedToppings)) return false;
+        return true;
+    }
+    private bool CompareLists<T>(List<T> list1, List<T> list2) where T : Object
+    {
+        if (list1.Count != list2.Count) return false;
+
+        for (int i = 0; i < list1.Count; i++)
+        { if (list1[i] != list2[i]) return false; }
+        return true;
+    }
+    
     private void CustomerDissatisfied()
     {
         _gameManager.Score = _gameManager.Score -1;

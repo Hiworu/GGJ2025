@@ -22,21 +22,15 @@ public class PlayerBehavior : MonoBehaviour
     private Vector3 _dragOffset;
 
     private void Start()
-    {
-        _camera = Camera.main;
-    }
+    { _camera = Camera.main; }
 
     private void Update()
     {
         if (_switchCamera.camera1.enabled)
-        {
-            _camera = _switchCamera.camera1;
-        }
+        { _camera = _switchCamera.camera1; }
 
         if (_switchCamera.camera2.enabled)
-        {
-            _camera = _switchCamera.camera2;
-        }
+        { _camera = _switchCamera.camera2; }
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -97,23 +91,13 @@ public class PlayerBehavior : MonoBehaviour
     private void ShootBoba()
     {
         if (_ammo <= 0)
-        {
-            return;
-        }
+        { return; }
 
         GameObject boba = Instantiate(_bobaPrefab, _bobaSpawnPoint.position, _bobaSpawnPoint.rotation);
         Rigidbody bobaRigidbody = boba.GetComponent<Rigidbody>();
         bobaRigidbody.AddForce(_camera.transform.forward * bobaShootForce, ForceMode.Impulse);
         _ammo--;
-        Destroy(boba, bobaSpawnTime);
-
         StartCoroutine(TrackBobaHitCoroutine(boba));
-        //if (hits object && objectHit.CompareTag("Seagull"))
-        //if hits a gameObject CompareTag("seagull")
-        //vat target = hit gameObject
-        //SeagullHit?.Invoke(target)
-        //Destroy(boba)
-
     }
 
     private IEnumerator TrackBobaHitCoroutine(GameObject boba)
