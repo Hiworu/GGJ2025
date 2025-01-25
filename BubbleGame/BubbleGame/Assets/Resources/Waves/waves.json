@@ -1,0 +1,26 @@
+[
+    {
+        "customers": [
+            {
+                "customer": {
+                },
+                "delay": 2.0
+            },
+            {
+                "customer": {
+                },
+                "delay": 3.5
+            }
+        ]
+    },
+
+    {
+        "customers": [
+            {
+                "customer": {
+                },
+                "delay": 1.0
+            }
+        ]
+    }
+]

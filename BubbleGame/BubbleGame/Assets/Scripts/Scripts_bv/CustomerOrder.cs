@@ -13,13 +13,17 @@ public class CustomerOrder : MonoBehaviour
     [SerializeField] private CustomerSO customer;
 
     [Header("Order")]
-    [SerializeField] private float waitTime;
+    [SerializeField] private float waitTime = 10;
     
-    private GameManager _gameManager;
+    private GameManagerScript _gameManager;
+    private BubbleTeaManager _bubbleTeaManager;
+    private SeagullManager _seagullManager;
+    private WaveManagerScript _waveManager;
     
+
     private bool _isOrderCompleted;
     private float _currentTime;
-   
+    private float _currentSeagullTime;
     
     
     
@@ -27,8 +31,11 @@ public class CustomerOrder : MonoBehaviour
     {
         //get GameManager
         GameObject gameManager = GameObject.Find("GameManager");
-        _gameManager = gameManager.GetComponent<GameManager>();
-        
+        _gameManager = gameManager.GetComponent<GameManagerScript>();
+        _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
+        _seagullManager = gameManager.GetComponent<SeagullManager>();
+        _waveManager = gameManager.GetComponent<WaveManagerScript>();
+
         //RANDOMIZED INGREDIENTS IF LIST == NULL
         if (customer.Bubbles == null)       { customer.Bubbles = new List<BubbleSO>(); }
         if (customer.Bubbles == null || customer.Bubbles.Count == 0)
@@ -61,24 +68,48 @@ public class CustomerOrder : MonoBehaviour
         {
             //timer
             _currentTime += Time.deltaTime;
-            if (_isOrderCompleted == false && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
-            if (_isOrderCompleted == true)                                  {CustomerSatisfied();}
+            if (CompareChoices()) {_isOrderCompleted = true;}
+            
+            if (!_isOrderCompleted && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
+            if (_seagullManager.IsAttackedBySeagull && _seagullManager.SeagullHasWon)
+            {
+                Debug.Log("gabbiano ha vinto :(");
+                CustomerDissatisfied();
+                return;
+            }
+            
+            if (_isOrderCompleted == true)                          { CustomerSatisfied(); }
         }
         
     }
 
+    private bool CompareChoices()
+    {
+        if (!CompareLists(customer.Bubbles, _bubbleTeaManager.selectedBubbles)) return false;
+        if (!CompareLists(customer.Syrups, _bubbleTeaManager.selectedSyrups)) return false;
+        if (!CompareLists(customer.Toppings, _bubbleTeaManager.selectedToppings)) return false;
+        return true;
+    }
+    private bool CompareLists<T>(List<T> list1, List<T> list2) where T : Object
+    {
+        if (list1.Count != list2.Count) return false;
+
+        for (int i = 0; i < list1.Count; i++)
+        { if (list1[i] != list2[i]) return false; }
+        return true;
+    }
+    
     private void CustomerDissatisfied()
     {
-        _gameManager.Score -= 1;
-        Destroy(this.gameObject);
+        _gameManager.PlayerHealth -= -1;
+        _waveManager.removeCustomer(this.gameObject);
+        Debug.Log($"customer removed:{this.gameObject.name}");
     }
 
     private void CustomerSatisfied()
     {
-        float prizeCash = Random.Range (5,50);
-        _gameManager.Score += 1;
-        _gameManager.Cash += Mathf.RoundToInt(prizeCash) ;
-        Destroy(this.gameObject);
+        _gameManager.Cash += customer.CashGiven;
+        _waveManager.removeCustomer(this.gameObject);
     }
     
 }
