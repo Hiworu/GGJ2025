@@ -11,9 +11,6 @@ public class CustomerOrder : MonoBehaviour
 {
     [Header ("Customer")]
     [SerializeField] private CustomerSO customer;
-
-    [Header("Order")]
-    [SerializeField] private float waitTime = 10;
     
     private GameManagerScript _gameManager;
     private BubbleTeaManager _bubbleTeaManager;
@@ -71,7 +68,7 @@ public class CustomerOrder : MonoBehaviour
             _currentTime += Time.deltaTime;
             if (CompareChoices()) {_isOrderCompleted = true;}
             
-            if (!_isOrderCompleted && _currentTime >= waitTime)     { CustomerDissatisfied(); return;}
+            if (!_isOrderCompleted && _currentTime >= _gameManager.customerWaitTime)     { CustomerDissatisfied(); return;}
             if (_seagullManager.IsAttackedBySeagull && _seagullManager.SeagullHasWon)
             {
                 Debug.Log("gabbiano ha vinto :(");
@@ -102,14 +99,15 @@ public class CustomerOrder : MonoBehaviour
     
     private void CustomerDissatisfied()
     {
-        _gameManager.PlayerHealth -= -1;
+        _gameManager.playerHealth -= 1;
+        Debug.Log($"Current health: {_gameManager.playerHealth}");
         _waveManager.removeCustomer(this.gameObject);
         Debug.Log($"customer removed:{this.gameObject.name}");
     }
 
     private void CustomerSatisfied()
     {
-        _gameManager.Cash += customer.CashGiven;
+        _gameManager.cash += customer.CashGiven;
         _waveManager.removeCustomer(this.gameObject);
     }
     

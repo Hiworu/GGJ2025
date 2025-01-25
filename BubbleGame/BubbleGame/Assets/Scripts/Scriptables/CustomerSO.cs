@@ -8,5 +8,5 @@ public class CustomerSO : ScriptableObject
     public List<ToppingSO> Toppings = new List<ToppingSO>();
     public List<BubbleSO> Bubbles = new List<BubbleSO>();
     public List<SyrupSO> Syrups = new List<SyrupSO>();
-    public int CashGiven;
+    public int CashGiven = 5;
 }
