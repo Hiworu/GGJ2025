@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject _tapioca;
     private GameObject _strawGeo;
     private BubbleTeaManager _bubbleTeaManager;
+    private PanelManager _panelManager;
     
     private SyrupBridge _selectedSyrup;
     private BubbleBridge _selectedBubble;
@@ -54,6 +56,7 @@ public class PlayerBehavior : MonoBehaviour
         GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
         _switchCamera = gameManager.GetComponent<SwitchCamera>();
         _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
+        
         _camera = Camera.main; 
         
         _isStrawEquipped = false;
@@ -126,23 +129,23 @@ public class PlayerBehavior : MonoBehaviour
                     _activeCup.transform.position = cupReadyPosition.position;
                     isReady = true;
                 }
+
+
                 if (target.CompareTag("Customer") && isReady)
                 {
-                    CustomerOrder customerOrder = target.GetComponent<CustomerOrder>();
+                    CustomerOrder customerOrder = target.GetComponentInParent<CustomerOrder>();
                     if (customerOrder != null)
                     {
-                        bool orderCorrect = customerOrder.ValidateOrder
-                        (
-                            // _bubbleTeaManager.selectedBubbles, // List<BubbleSO>
-                            // _bubbleTeaManager.selectedSyrups, // List<SyrupSO>
-                            // _bubbleTeaManager.selectedToppings // List<ToppingSO>
-                            
-                            _bubbleTeaManager.selectedBubble,
-                            _bubbleTeaManager.selectedSyrup,
-                            _bubbleTeaManager.selectedTopping
-                            );
-                        if (orderCorrect) { Debug.Log("Customer Satisfied"); customerOrder.CustomerSatisfied();}
-                        else { Debug.Log("Customer Dissatisfied"); customerOrder.CustomerDissatisfied(); }
+                        bool isOrderValid = customerOrder.ValidateOrder
+                            (_bubbleTeaManager.selectedBubble, _bubbleTeaManager.selectedSyrup, _bubbleTeaManager.selectedTopping);
+                        if (isOrderValid)
+                        {
+                            Debug.Log("Customer is satisfied!");
+                        }
+                        else
+                        {
+                            Debug.Log("Customer is dissatisfied.");
+                        }
                         
                         ResetCup();
                     }
