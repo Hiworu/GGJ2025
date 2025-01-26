@@ -125,10 +125,11 @@ public class PlayerBehavior : MonoBehaviour
                     _activeCup.transform.position = cupReadyPosition.position;
                     isReady = true;
                 }
+
+
                 if (target.CompareTag("Customer") && isReady)
                 {
-                    
-                    CustomerOrder customerOrder = target.GetComponent<CustomerOrder>();
+                    CustomerOrder customerOrder = target.GetComponentInParent<CustomerOrder>();
                     if (customerOrder != null)
                     {
                         bool isOrderValid = customerOrder.ValidateOrder
