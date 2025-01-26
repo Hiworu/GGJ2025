@@ -106,7 +106,6 @@ public class CustomerOrder : MonoBehaviour
         return true;
     }
 
-
     public bool ValidateOrder(List<BubbleSO> bubbles, List<SyrupSO> syrups, List<ToppingSO> toppings)
     {
         bool bubblesMatch = CompareLists(customer.Bubbles, bubbles);
@@ -142,25 +141,26 @@ public class CustomerOrder : MonoBehaviour
     {
         List<GameObject> customerStyles = GetGameObjectsFromRandomFolder("Prefabs/CustomerFeatures");
         GameObject body = customerStyles[0];
-        Debug.Log(body);
+        //Debug.Log(body);
         GameObject hair = customerStyles[1];
-        Debug.Log(hair);
+        //Debug.Log(hair);
         GameObject shirt = customerStyles[2];
-        Debug.Log(shirt);
+        //Debug.Log(shirt);
 
-
-
+        GameObject order = Resources.Load<GameObject>("Prefabs/OrderBubble");
+        Sprite boba = _bubbleTeaManager.selectedBubbles[0].GetComponent<SpriteRenderer>().sprite;
+        
 
         if (body != null && hair != null )
         {
             GameObject bodyClone = Instantiate(body, this.transform.position , Quaternion.identity);
             bodyClone.transform.SetParent(this.transform); // Imposta this come genitore
-            Debug.Log("Body aggiunto come figlio: " + body.name);
+            //Debug.Log("Body aggiunto come figlio: " + body.name);
 
             GameObject hairClone = Instantiate(hair, this.transform.position, Quaternion.identity);
             hairClone.transform.SetParent(this.transform); // Imposta this come genitore
             GameObject hairChild = hairClone.transform.Find("Hair").gameObject;
-            Debug.Log(hair);
+            //Debug.Log(hair);
             spriteRenderer = hairChild.GetComponent<SpriteRenderer>();
             spriteRenderer.color = RandomColorCreator();
 
@@ -170,8 +170,14 @@ public class CustomerOrder : MonoBehaviour
             spriteRenderer = shirtChild.GetComponent<SpriteRenderer>();
             spriteRenderer.color = RandomColorCreator();
 
+            order = Instantiate(order, this.transform.position, Quaternion.identity);
+            order.transform.SetParent(this.transform); // Imposta this come genitore
+            SpriteRenderer bobaSpriteRenderer = order.transform.Find("Boba").GetComponent<SpriteRenderer>();
+            bobaSpriteRenderer.sprite = boba;
 
-            Debug.Log("Hair aggiunto come figlio: " + hair.name);
+
+
+            //Debug.Log("Hair aggiunto come figlio: " + hair.name);
         }
         else
         {
@@ -180,7 +186,7 @@ public class CustomerOrder : MonoBehaviour
 
     }
 
-public Color RandomColorCreator()
+    public Color RandomColorCreator()
     {
         float r = Random.Range(0f, 1f); // Valore casuale per il rosso
         float g = Random.Range(0f, 1f); // Valore casuale per il verde
@@ -188,43 +194,43 @@ public Color RandomColorCreator()
         return new Color(r, g, b);
     }
 
- public List<GameObject> GetGameObjectsFromRandomFolder(string baseFolderPath)
-{
-    // Ottieni tutte le sottocartelle nel percorso base (relativo a Resources)
-    string resourcesPath = Path.Combine(Application.dataPath, "Resources", baseFolderPath);
-    string[] subFolders = Directory.GetDirectories(resourcesPath);
-
-    if (subFolders.Length > 0)
+    public List<GameObject> GetGameObjectsFromRandomFolder(string baseFolderPath)
     {
-        // Scegli una cartella casuale
-        int randomIndex = Random.Range(0, subFolders.Length);
-        string randomFolder = subFolders[randomIndex];
+        // Ottieni tutte le sottocartelle nel percorso base (relativo a Resources)
+        string resourcesPath = Path.Combine(Application.dataPath, "Resources", baseFolderPath);
+        string[] subFolders = Directory.GetDirectories(resourcesPath);
 
-        // Ottieni il nome della cartella (ad esempio, "Type1")
-        string folderName = Path.GetFileName(randomFolder);
-
-        // Costruisci il percorso relativo a Resources
-        string relativePath = Path.Combine(baseFolderPath, folderName);
-
-        // Carica tutti i GameObject dalla cartella casuale
-        GameObject[] gameObjects = Resources.LoadAll<GameObject>(relativePath);
-
-        if (gameObjects.Length > 0)
+        if (subFolders.Length > 0)
         {
-            // Converti l'array in una lista e restituiscila
-            return new List<GameObject>(gameObjects);
+            // Scegli una cartella casuale
+            int randomIndex = Random.Range(0, subFolders.Length);
+            string randomFolder = subFolders[randomIndex];
+
+            // Ottieni il nome della cartella (ad esempio, "Type1")
+            string folderName = Path.GetFileName(randomFolder);
+
+            // Costruisci il percorso relativo a Resources
+            string relativePath = Path.Combine(baseFolderPath, folderName);
+
+            // Carica tutti i GameObject dalla cartella casuale
+            GameObject[] gameObjects = Resources.LoadAll<GameObject>(relativePath);
+
+            if (gameObjects.Length > 0)
+            {
+                // Converti l'array in una lista e restituiscila
+                return new List<GameObject>(gameObjects);
+            }
+            else
+            {
+                Debug.LogWarning($"Nessun GameObject trovato nella cartella: {relativePath}");
+                return null;
+            }
         }
         else
         {
-            Debug.LogWarning($"Nessun GameObject trovato nella cartella: {relativePath}");
+            Debug.LogWarning($"Nessuna sottocartella trovata nel percorso: {baseFolderPath}");
             return null;
         }
     }
-    else
-    {
-        Debug.LogWarning($"Nessuna sottocartella trovata nel percorso: {baseFolderPath}");
-        return null;
-    }
-}
 
 }
