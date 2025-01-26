@@ -31,7 +31,10 @@ public class SwitchCamera :  MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S)||scrollInput<0||Input.GetKeyDown(KeyCode.D))
         {
             Switch(2);
+/*              SoundManager.Instance.PlayAudio("Audios/bruhSound"); */
         }
+
+
 
     }
         void Switch(int cameravalue)
