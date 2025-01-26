@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
@@ -131,12 +132,16 @@ public class PlayerBehavior : MonoBehaviour
                     {
                         bool orderCorrect = customerOrder.ValidateOrder
                         (
-                            _bubbleTeaManager.selectedBubbles, // List<BubbleSO>
-                            _bubbleTeaManager.selectedSyrups, // List<SyrupSO>
-                            _bubbleTeaManager.selectedToppings // List<ToppingSO>
+                            // _bubbleTeaManager.selectedBubbles, // List<BubbleSO>
+                            // _bubbleTeaManager.selectedSyrups, // List<SyrupSO>
+                            // _bubbleTeaManager.selectedToppings // List<ToppingSO>
+                            
+                            _bubbleTeaManager.selectedBubble,
+                            _bubbleTeaManager.selectedSyrup,
+                            _bubbleTeaManager.selectedTopping
                             );
-                        if (orderCorrect) { Debug.Log("Customer Satisfied"); }
-                        else { Debug.Log("Customer Dissatisfied"); }
+                        if (orderCorrect) { Debug.Log("Customer Satisfied"); customerOrder.CustomerSatisfied();}
+                        else { Debug.Log("Customer Dissatisfied"); customerOrder.CustomerDissatisfied(); }
                         
                         ResetCup();
                     }

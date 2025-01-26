@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class BubbleTeaManager : MonoBehaviour
 {
-    public List<BubbleSO> selectedBubbles = new List<BubbleSO>();
-    public List <SyrupSO> selectedSyrups = new List<SyrupSO>();
-    public List <ToppingSO> selectedToppings = new List<ToppingSO>();
+    // public List<BubbleSO> selectedBubbles = new List<BubbleSO>();
+    // public List <SyrupSO> selectedSyrups = new List<SyrupSO>();
+    // public List <ToppingSO> selectedToppings = new List<ToppingSO>();
+    //
+    public BubbleSO selectedBubble;
+    public SyrupSO selectedSyrup;
+    public ToppingSO selectedTopping;
 
-    public void AddBubble(BubbleSO bubble)
-    { selectedBubbles.Add(bubble); }
+    public void SetBubble(BubbleSO bubble)
+    {
+        // selectedBubbles.Add(bubble);
+        selectedBubble = bubble;
+    }
 
-    public void AddSyrup(SyrupSO syrup)
-    { selectedSyrups.Add(syrup); }
+    public void SetSyrup(SyrupSO syrup)
+    {
+        // selectedSyrups.Add(syrup);
+        selectedSyrup = syrup;
+    }
 
-    public void AddTopping(ToppingSO topping)
-    { selectedToppings.Add(topping); }
+    public void SetTopping(ToppingSO topping)
+    {
+        // selectedToppings.Add(topping)
+        selectedTopping = topping;
+    }
 
     public void ClearOrder()
     {
-        selectedBubbles.Clear();
-        selectedSyrups.Clear();
-        selectedToppings.Clear();
+        // selectedBubbles.Clear();
+        // selectedSyrups.Clear();
+        // selectedToppings.Clear();
+        selectedBubble = null;
+        selectedSyrup = null;
+        selectedTopping = null;
     }
 }
