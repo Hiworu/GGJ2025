@@ -27,12 +27,14 @@ public class SeagullManager : MonoBehaviour
    private GameObject _activeSeagull;
    private WaveManagerScript _waveManager;
    private GameManagerScript _gameManager;
+   private SoundManager _soundManager;
    
    private void Start()
    {
       GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
       _waveManager = gameManager.GetComponent<WaveManagerScript>();
       _gameManager = gameManager.GetComponent<GameManagerScript>();
+      _soundManager = gameManager.GetComponent<SoundManager>();
       
       _currentTime = 0f;
       _currentSeagullSpawnTime = 0;
@@ -46,7 +48,9 @@ public class SeagullManager : MonoBehaviour
       {
          _currentTime += Time.deltaTime;
          if (_currentTime >= seagullSpawnTimer)    
-         { SpawnSeagull(); }
+         { 
+            _soundManager.PlayAudio("/Suoni/Gabbiano arriva");
+            SpawnSeagull(); }
       }
 
       else
@@ -65,7 +69,7 @@ public class SeagullManager : MonoBehaviour
    private void MoveSeagull()
    {
       _currentSeagullSpawnTime += Time.deltaTime;
-
+      _soundManager.PlayAudio("/Suoni/Gabbiano vola");
 
 
       if (_waveManager.customers.Count > 0)
