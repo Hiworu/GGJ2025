@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -798,7 +798,7 @@ Transform:
   m_GameObject: {fileID: 603259878}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.79, y: -2, z: -3.34}
+  m_LocalPosition: {x: -4, y: -2.5, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -902,7 +902,7 @@ Transform:
   m_GameObject: {fileID: 753028163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.75, y: -2, z: -0.79}
+  m_LocalPosition: {x: -4, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1394,7 +1394,7 @@ Transform:
   m_GameObject: {fileID: 1171794882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.03, y: -2, z: 0.45}
+  m_LocalPosition: {x: -4, y: -2.5, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1775,7 +1775,7 @@ Transform:
   m_GameObject: {fileID: 1604028099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.91, y: -2, z: -2.17}
+  m_LocalPosition: {x: -4, y: -2.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1842,9 +1842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb8e85fb620441409d67df7c54549f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedBubbles: []
-  selectedSyrups: []
-  selectedToppings: []
+  selectedBubble: {fileID: 0}
+  selectedSyrup: {fileID: 0}
+  selectedTopping: {fileID: 0}
 --- !u!114 &1721071393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,7 +1898,7 @@ MonoBehaviour:
   - {fileID: 603259879}
   - {fileID: 753028164}
   - {fileID: 1171794883}
-  - {fileID: 1974705175}
+  - {fileID: 0}
   - {fileID: 0}
   customerPrefab: {fileID: 4448838479570451255, guid: 62e5c873ec3fdd947943f0a10a1ebd04, type: 3}
 --- !u!114 &1721071396
@@ -1918,37 +1918,6 @@ MonoBehaviour:
   attackSeagullTime: 7
   seagullPrefab: {fileID: 6299513045323307053, guid: d063d08509869e84aa244641ae86f2cb, type: 3}
   seagullSpawnPoint: {fileID: 1989873832}
---- !u!1 &1974705174
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1974705175}
-  m_Layer: 0
-  m_Name: SpawnTransform5
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1974705175
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974705174}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.76, y: -2, z: -0.41}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1989873831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,7 +2084,6 @@ SceneRoots:
   - {fileID: 603259879}
   - {fileID: 753028164}
   - {fileID: 1171794883}
-  - {fileID: 1974705175}
   - {fileID: 531288421}
   - {fileID: 309788173}
   - {fileID: 949986564}
