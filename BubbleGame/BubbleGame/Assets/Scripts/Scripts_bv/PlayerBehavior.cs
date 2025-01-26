@@ -10,6 +10,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float bobaShootForce = 50f;
     [SerializeField] private float bobaSpawnTime = 10f;
     public event Action<Transform> SeagullHit;
+    private SeagullManager _seagullManager;
 
 
     private SwitchCamera _switchCamera;
@@ -56,6 +57,7 @@ public class PlayerBehavior : MonoBehaviour
         _switchCamera = gameManager.GetComponent<SwitchCamera>();
         _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
         _panelManager = gameManager.GetComponent<PanelManager>();
+        _seagullManager = gameManager.GetComponent<SeagullManager>();
         //_soundManager = gameManager.GetComponent<SoundManager>();
         
         _camera = Camera.main; 
@@ -82,7 +84,6 @@ public class PlayerBehavior : MonoBehaviour
             {
                 var target = hit.collider.gameObject;
                 //_soundManager.PlayAudio("Suoni/Interazione.mp3");
-                Debug.LogWarning(target.name);
 
                 if (!_isStrawEquipped)
                 {
@@ -169,7 +170,6 @@ public class PlayerBehavior : MonoBehaviour
 
             if (_isStrawEquipped == true)
             {
-                Debug.Log("Shoot Boba");
                 ShootBoba();
             }
         }
@@ -259,12 +259,11 @@ public class PlayerBehavior : MonoBehaviour
             Vector3 direction = (targetPoint - spawnPoint).normalized;
             
             GameObject boba = Instantiate(bobaPrefab, spawnPoint, Quaternion.identity);
-            if(boba!=null){Debug.LogWarning("No boba");}
             
             Rigidbody bobaRigidbody = boba.GetComponent<Rigidbody>();
             if (bobaRigidbody != null)
             {
-                bobaRigidbody.velocity = direction * bobaShootForce; // Adjust the force as needed
+                bobaRigidbody.velocity = direction * bobaShootForce;
             }
             // _ammo--;
 
@@ -276,6 +275,7 @@ public class PlayerBehavior : MonoBehaviour
     private IEnumerator TrackBobaHitCoroutine(GameObject boba)
     {
         float elapsedTime = 0f;
+        int waterLayerMask = LayerMask.GetMask("Water");
         Vector3 previousPosition = boba.transform.position;
         
         while (elapsedTime < bobaSpawnTime)
@@ -288,16 +288,23 @@ public class PlayerBehavior : MonoBehaviour
             
             //_soundManager.PlayAudio("/Suoni/Sparo");
             RaycastHit hit;
-            if (Physics.Raycast(boba.transform.position, direction, out hit, Mathf.Infinity)) 
+            if (Physics.Raycast(boba.transform.position, direction, out hit, Mathf.Infinity, waterLayerMask))
             {
                 Transform hitObject = hit.collider.gameObject.transform;
+                if (hitObject != null)
+                {
+                    Debug.Log("Hit Seagull");
+                }
 
+                ;
                 // Check if the hit object is a seagull
                 if (hitObject.CompareTag("Seagull"))
                 {
+                    var targetHit = hitObject;
                     Debug.Log($"Seagull hit: {hitObject.name}");
                     //_soundManager.PlayAudio("/Suoni/Gabbiano Death");
-                    SeagullHit?.Invoke(hitObject);
+
+                    _seagullManager.ResetSeagull();
                     Destroy(boba);
                     yield break;
                 }

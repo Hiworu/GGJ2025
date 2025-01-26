@@ -113,7 +113,7 @@ public class SeagullManager : MonoBehaviour
       ResetSeagull();
    }
 
-   private void ResetSeagull()
+   public void ResetSeagull()
    {
       Destroy(_activeSeagull);
       _isSeagullSpawned = false;

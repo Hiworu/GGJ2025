@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c4d69314f5ce3468aaf4f0ed3de948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobaShootForce: 50
+  bobaShootForce: 10
   bobaSpawnTime: 10
   cup: {fileID: 9171340193232160612, guid: ddbd60feb5cbf7249be0652c364dc14f, type: 3}
   cupSpawnPoint: {fileID: 57560954}
