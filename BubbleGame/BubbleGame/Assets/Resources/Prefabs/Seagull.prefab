@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1912508224968289940}
   m_Layer: 0
   m_Name: Seagull
-  m_TagString: Untagged
+  m_TagString: Seagull
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

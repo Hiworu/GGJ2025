@@ -12,6 +12,7 @@ TagManager:
   - Cup
   - ActiveCup
   - Customer
+  - Seagull
   layers:
   - Default
   - TransparentFX

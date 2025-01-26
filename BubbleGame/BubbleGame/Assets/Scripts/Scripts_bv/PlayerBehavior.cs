@@ -34,7 +34,6 @@ public class PlayerBehavior : MonoBehaviour
     private bool doesBobaExist;
     
     private bool doesSyrupExist;
-    private bool doesToppingExist;
     private bool isReady;
     
     private Camera _camera;
@@ -57,7 +56,6 @@ public class PlayerBehavior : MonoBehaviour
         doesCupExist = false;
         doesBobaExist = false;
         doesSyrupExist = false;
-        doesToppingExist = false;
         isReady = false;
     }
 
@@ -271,7 +269,6 @@ public class PlayerBehavior : MonoBehaviour
         doesCupExist = false;
         doesBobaExist = false;
         doesSyrupExist = false;
-        doesToppingExist = false;
         isReady = false;    
     }
 
