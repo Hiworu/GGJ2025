@@ -42,6 +42,11 @@ public class CustomerOrder : MonoBehaviour
     private float _currentSeagullTime;
     private SpriteRenderer spriteRenderer;
 
+    private void Star()
+    {
+        _soundManager = _gameManager.GetComponent<SoundManager>();
+    }
+
 
 
     private void Awake()
@@ -157,14 +162,14 @@ public class CustomerOrder : MonoBehaviour
     {
         _gameManager.playerHealth -=1;
         _waveManager.removeCustomer(this.gameObject);
-        _soundManager.PlayAudio("Donna_Rabbia");
+        _soundManager.PlayAudio("/Suoni/Donna_Rabbia");
     }
 
     public void CustomerSatisfied()
     {
-        _soundManager.PlayAudio("Donna_Contenta");
+        _soundManager.PlayAudio("/Suoni/Donna_Contenta");
         _gameManager.cash += customer.CashGiven;
-        _soundManager.PlayAudio("Cassaforte");
+        _soundManager.PlayAudio("/Suoni/Cassaforte");
         _waveManager.removeCustomer(this.gameObject);
     }
 
