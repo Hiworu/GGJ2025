@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 2971175331089720417}
   m_Layer: 0
   m_Name: stack_of_cups_geo_02
-  m_TagString: Untagged
+  m_TagString: Cup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 1777008664476309855}
   m_Layer: 0
   m_Name: stack_of_cups_geo_03
-  m_TagString: Untagged
+  m_TagString: Cup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 5493441078013554066}
   m_Layer: 0
   m_Name: dispenser_geo_03
-  m_TagString: Untagged
+  m_TagString: Syrup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -923,9 +923,10 @@ GameObject:
   - component: {fileID: 5320425526446006723}
   - component: {fileID: 7880711710785451575}
   - component: {fileID: 4635469281495410695}
+  - component: {fileID: 4453175607925559050}
   m_Layer: 0
   m_Name: mango
-  m_TagString: Untagged
+  m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1016,6 +1017,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.61812747, y: 0.06602478, z: 0.6513766}
   m_Center: {x: -0.0004695207, y: -0.021243349, z: 0.059145972}
+--- !u!114 &4453175607925559050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369474959560738565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ed05c056773864ab94e8e38a4e3dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbleData: {fileID: 11400000, guid: fa0a29acdf809904ca2066661f0ffd66, type: 2}
 --- !u!1 &2402934502537166268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1056,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2402934502537166268}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.879892, y: 8.188805, z: 1.4436874}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1372,7 +1386,7 @@ GameObject:
   - component: {fileID: 6172428226873007695}
   m_Layer: 0
   m_Name: stack_of_cups_geo_01
-  m_TagString: Untagged
+  m_TagString: Cup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1478,7 +1492,7 @@ GameObject:
   - component: {fileID: 4607376765703287784}
   m_Layer: 0
   m_Name: cream_bottle_geo
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1597,7 +1611,7 @@ GameObject:
   - component: {fileID: 1974918630054391852}
   m_Layer: 0
   m_Name: basket_geo_01
-  m_TagString: Untagged
+  m_TagString: Topping
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2214,9 +2228,10 @@ GameObject:
   - component: {fileID: 9089489042285231137}
   - component: {fileID: 1491777365214128523}
   - component: {fileID: 3244594935475943595}
+  - component: {fileID: 3554846244821391552}
   m_Layer: 0
   m_Name: dispenser_geo_01
-  m_TagString: Untagged
+  m_TagString: Syrup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2299,6 +2314,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syrupData: {fileID: 11400000, guid: a8292a0b773517f478a637fd79bcd655, type: 2}
+--- !u!65 &3554846244821391552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894693977598719778}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9131652, y: 1.0226337, z: 1.079694}
+  m_Center: {x: -0.0009313673, y: 0.26130676, z: 0.3841027}
 --- !u!1 &5998414998623776648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,9 +2532,10 @@ GameObject:
   - component: {fileID: 6717921093910046177}
   - component: {fileID: 2455467978058287808}
   - component: {fileID: 3191947932814986779}
+  - component: {fileID: 3676507216422184096}
   m_Layer: 0
   m_Name: tapioca balls (1)
-  m_TagString: Untagged
+  m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2589,6 +2626,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5619339, y: 0.06602478, z: 0.6513766}
   m_Center: {x: 0, y: -0.00000006146729, z: 0}
+--- !u!114 &3676507216422184096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250812964407466929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ed05c056773864ab94e8e38a4e3dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbleData: {fileID: 11400000, guid: 491013e4672323f43a8b8226bbd0d75e, type: 2}
 --- !u!1 &6568534749145255837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3205,9 +3255,10 @@ GameObject:
   - component: {fileID: 983249250365996263}
   - component: {fileID: 1380375026689218049}
   - component: {fileID: 4528928182785636345}
+  - component: {fileID: 240403831862508912}
   m_Layer: 0
   m_Name: tapioca balls
-  m_TagString: Untagged
+  m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3298,6 +3349,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5619339, y: 0.06602478, z: 0.6513766}
   m_Center: {x: 0, y: -0.00000006146729, z: 0}
+--- !u!114 &240403831862508912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8360261846141438112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ed05c056773864ab94e8e38a4e3dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbleData: {fileID: 11400000, guid: 9faba0529e1136c4e9d4dc10db3de022, type: 2}
 --- !u!1 &8700923956217544823
 GameObject:
   m_ObjectHideFlags: 0
@@ -3399,7 +3463,7 @@ GameObject:
   - component: {fileID: 4011381970007632055}
   m_Layer: 0
   m_Name: dispenser_geo_02
-  m_TagString: Untagged
+  m_TagString: Syrup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
