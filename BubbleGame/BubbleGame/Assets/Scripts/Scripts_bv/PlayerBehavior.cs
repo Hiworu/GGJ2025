@@ -14,6 +14,30 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject _bobaPrefab;
     private Transform _bobaSpawnPoint;
 
+    public GameObject cup;
+    private GameObject _syrup;
+    private GameObject _cupCoverGeo;
+    private GameObject _tapioca;
+    private GameObject _strawGeo;
+    private BubbleTeaManager _bubbleTeaManager;
+    
+    private SyrupSO _selectedSyrup;
+    private BubbleSO _selectedBubble;
+    private ToppingSO _selectedTopping;
+    
+    private GameObject _activeCup;
+    private bool doesCupExist;
+    
+    public Transform cupSpawnPoint;
+    public Transform cupReadyPosition;
+
+    public GameObject bobaPrefab;
+    private GameObject _activeBoba;
+    private bool doesBobaExist;
+    
+    private bool doesSyrupExist;
+    private bool isReady;
+    
     private Camera _camera;
     private int _maxAmmo = 1;
     private int _ammo = 0;
@@ -27,10 +51,14 @@ public class PlayerBehavior : MonoBehaviour
     {
         GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
         _switchCamera = gameManager.GetComponent<SwitchCamera>();
+        _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
         _camera = Camera.main; 
-        _dragPlane = new Plane(Vector3.up, Vector3.zero);
         
         _isStrawEquipped = false;
+        doesCupExist = false;
+        doesBobaExist = false;
+        doesSyrupExist = false;
+        isReady = false;
     }
 
     private void Update()
@@ -41,17 +69,81 @@ public class PlayerBehavior : MonoBehaviour
         else
         { _camera = _switchCamera.camera2; }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
             {
                 var target = hit.collider.gameObject;
-                //if (target == bubble || topping)
-                if (target.CompareTag("Bubble") || target.CompareTag("Topping"))
+                Debug.LogWarning(target.name);
+
+                if (target.CompareTag("Cup"))
                 {
-                    StartDragging(target, hit.point);
+                    if (doesCupExist) { return; }
+                    _activeCup = Instantiate(cup, cupSpawnPoint.position, Quaternion.identity);
+                    
+
+                    // Find specific child objects by name
+                    _syrup = _activeCup.transform.Find("Liquido").gameObject;
+                    _tapioca = _activeCup.transform.Find("Tapioca").gameObject;
+                    _strawGeo = _activeCup.transform.Find("straw_geo").gameObject;
+                    _cupCoverGeo = _activeCup.transform.Find("cup_cover_geo").gameObject;
+
+                    _syrup.SetActive(false);
+                    _tapioca.SetActive(false);
+                    _strawGeo.SetActive(false);
+                    _cupCoverGeo.SetActive(false);
+
+                    doesCupExist = true;
                 }
+                
+                if (target.CompareTag("Bubble"))
+                {
+                    if (!doesCupExist|| doesBobaExist) { return;}
+                    _activeBoba = Instantiate(bobaPrefab, hit.point, Quaternion.identity);
+                    _selectedBubble = target.GetComponent<BubbleSO>();
+
+                    doesBobaExist = true;
+                    _draggedObject = _activeBoba;
+                }
+
+                if (target.CompareTag("Syrup") && doesBobaExist)
+                {
+                    _syrup.SetActive(true);
+                    _selectedSyrup = target.GetComponent<SyrupSO>();
+
+                    doesSyrupExist = true;
+                }
+
+                if (target.CompareTag("Topping") && doesSyrupExist)
+                {
+                    _strawGeo.SetActive(true);
+                    _cupCoverGeo.SetActive(true);
+                    _selectedTopping = target.GetComponent<ToppingSO>();
+
+                    _activeCup.transform.position = cupReadyPosition.position;
+                    isReady = true;
+                }
+                if (target.CompareTag("Customer") && isReady)
+                {
+                    CustomerOrder customerOrder = target.GetComponent<CustomerOrder>();
+                    if (customerOrder != null)
+                    {
+                        bool orderCorrect = customerOrder.ValidateOrder
+                        (
+                            _bubbleTeaManager.selectedBubbles, // List<BubbleSO>
+                            _bubbleTeaManager.selectedSyrups, // List<SyrupSO>
+                            _bubbleTeaManager.selectedToppings // List<ToppingSO>
+                            );
+                        if (orderCorrect) { Debug.Log("Customer Satisfied"); }
+                        else { Debug.Log("Customer Dissatisfied"); }
+                        
+                        ResetCup();
+                    }
+
+                    
+                }
+                
                 //if (target == straw)
                 else if (target.CompareTag("Straw"))
                 {
@@ -64,7 +156,7 @@ public class PlayerBehavior : MonoBehaviour
                 }
             }
         }
-        if (_draggedObject != null && Input.GetButton("Fire1"))
+        if (_draggedObject != null && Input.GetMouseButton(0)) 
         {
             DragObject();
         }
@@ -72,8 +164,33 @@ public class PlayerBehavior : MonoBehaviour
         //drop
         if (Input.GetButtonUp("Fire1"))
         {
-            _draggedObject = null;
+            if (_draggedObject != null)
+            {
+                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+                {
+                    var target = hit.collider.gameObject;
+                    if (target.CompareTag("ActiveCup"))
+                    { _tapioca.SetActive(true); }
+                    Destroy(_draggedObject);
+                    _draggedObject = null;
+                }
+                else
+                {
+                    Destroy(_draggedObject);
+                    _draggedObject = null;
+                    doesBobaExist = false;
+                }
+            }
+            else
+            {
+                Destroy(_draggedObject);
+                _draggedObject = null;
+                doesBobaExist = false;
+            }
         }
+
+
 
         //charge straw
         if (Input.GetMouseButtonDown(1) && _isStrawEquipped)
@@ -87,21 +204,18 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    private void StartDragging(GameObject target, Vector3 hitPoint)
-    {
-        _draggedObject = target;
-        _dragOffset = target.transform.position - hitPoint;
-    }
     
     private void DragObject()
     {
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        _dragPlane = new Plane(Vector3.up, _draggedObject.transform.position);
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition); 
         float distanceToPlane;
-        
+
+
         if (_dragPlane.Raycast(ray, out distanceToPlane))
         {
-            Vector3 worldPosition = ray.GetPoint(distanceToPlane);
-            _draggedObject.transform.position = worldPosition + _dragOffset; 
+            Vector3 worldPosition = ray.GetPoint(distanceToPlane); 
+            _draggedObject.transform.position = worldPosition; 
         }
     }
 
@@ -151,4 +265,19 @@ public class PlayerBehavior : MonoBehaviour
         }
         Destroy(boba);
     }
+    
+    
+    private void ResetCup()
+    {
+        if (_activeCup != null)
+        {
+            Destroy(_activeCup);
+            doesCupExist = false;
+        }
+        doesCupExist = false;
+        doesBobaExist = false;
+        doesSyrupExist = false;
+        isReady = false;    
+    }
+
 }
