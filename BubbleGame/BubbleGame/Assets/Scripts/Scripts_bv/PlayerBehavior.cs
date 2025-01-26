@@ -7,15 +7,16 @@ using UnityEngine.Rendering;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    [SerializeField] private float bobaShootForce = 10f;
+    [SerializeField] private float bobaShootForce = 50f;
     [SerializeField] private float bobaSpawnTime = 10f;
     public event Action<Transform> SeagullHit;
+    private SeagullManager _seagullManager;
 
 
     private SwitchCamera _switchCamera;
     private GameObject _bobaPrefab;
-    private Transform _bobaSpawnPoint;
-    private SoundManager _soundManager;
+    // private Transform _bobaSpawnPoint;
+    //private SoundManager _soundManager;
 
     public GameObject cup;
     private GameObject _syrup;
@@ -43,8 +44,7 @@ public class PlayerBehavior : MonoBehaviour
     private bool isReady;
     
     private Camera _camera;
-    private int _maxAmmo = 1;
-    private int _ammo = 0;
+
 
     private GameObject _draggedObject;
     private Vector3 _dragOffset;
@@ -56,7 +56,9 @@ public class PlayerBehavior : MonoBehaviour
         GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
         _switchCamera = gameManager.GetComponent<SwitchCamera>();
         _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
-        _soundManager = gameManager.GetComponent<SoundManager>();
+        _panelManager = gameManager.GetComponent<PanelManager>();
+        _seagullManager = gameManager.GetComponent<SeagullManager>();
+        //_soundManager = gameManager.GetComponent<SoundManager>();
         
         _camera = Camera.main; 
         
@@ -82,7 +84,6 @@ public class PlayerBehavior : MonoBehaviour
             {
                 var target = hit.collider.gameObject;
                 //_soundManager.PlayAudio("Suoni/Interazione.mp3");
-                Debug.LogWarning(target.name);
 
                 if (!_isStrawEquipped)
                 {
@@ -165,13 +166,11 @@ public class PlayerBehavior : MonoBehaviour
                     }
                 }
 
-                if (_isStrawEquipped )
-                {
-                    if (_ammo > 0)
-                    { ShootBoba(); }
-                    
-                }
-                
+            }
+
+            if (_isStrawEquipped == true)
+            {
+                ShootBoba();
             }
         }
         if (_draggedObject != null && Input.GetMouseButton(0)) 
@@ -213,16 +212,13 @@ public class PlayerBehavior : MonoBehaviour
 
 
         //charge straw
-        if (Input.GetMouseButtonDown(1) && _isStrawEquipped)
+        if (Input.GetMouseButtonDown(1))
         {
             _panelManager.ToggleStrawPanel();
-            _ammo++;
+            _isStrawEquipped = !_isStrawEquipped;
+            // _ammo++;
             //_soundManager.PlayAudio("/Suoni/Sucking ballz");
-            if (_ammo > _maxAmmo)
-            {
-                _ammo = _maxAmmo;
-                Debug.Log("Max Ammo");
-            }
+            // if (_ammo > _maxAmmo) { _ammo = _maxAmmo; }
         }
     }
 
@@ -243,45 +239,72 @@ public class PlayerBehavior : MonoBehaviour
 
 
 
-    private void SelectStraw(GameObject straw)
-    {
-        Debug.Log($"Straw selected: {straw.name}");
-        _isStrawEquipped = true;
-        //_soundManager.PlayAudio("Interazione");
-    }
+    // private void SelectStraw(GameObject straw)
+    // {
+    //     Debug.Log($"Straw selected: {straw.name}");
+    //     _isStrawEquipped = true;
+    //     //_soundManager.PlayAudio("Interazione");
+    // }
 
 
     private void ShootBoba()
     {
-        if (_ammo <= 0)
-        { return; }
+        // if (_ammo <= 0) { return; }
+        
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        {
+            Vector3 spawnPoint = _camera.transform.position + _camera.transform.forward * 2f; 
+            Vector3 targetPoint = hit.point;
+            Vector3 direction = (targetPoint - spawnPoint).normalized;
+            
+            GameObject boba = Instantiate(bobaPrefab, spawnPoint, Quaternion.identity);
+            
+            Rigidbody bobaRigidbody = boba.GetComponent<Rigidbody>();
+            if (bobaRigidbody != null)
+            {
+                bobaRigidbody.velocity = direction * bobaShootForce;
+            }
+            // _ammo--;
 
-        GameObject boba = Instantiate(_bobaPrefab, _bobaSpawnPoint.position, _bobaSpawnPoint.rotation);
-        Rigidbody bobaRigidbody = boba.GetComponent<Rigidbody>();
-        bobaRigidbody.AddForce(_camera.transform.forward * bobaShootForce, ForceMode.Impulse);
-        _ammo--;
-        StartCoroutine(TrackBobaHitCoroutine(boba));
+            StartCoroutine(TrackBobaHitCoroutine(boba));
+
+        }
     }
 
     private IEnumerator TrackBobaHitCoroutine(GameObject boba)
     {
         float elapsedTime = 0f;
+        int waterLayerMask = LayerMask.GetMask("Water");
+        Vector3 previousPosition = boba.transform.position;
+        
         while (elapsedTime < bobaSpawnTime)
         {
             elapsedTime += Time.deltaTime;
+            
+            Vector3 currentPosition = boba.transform.position;
+            Vector3 direction = (currentPosition - previousPosition).normalized;
+            previousPosition = currentPosition;
+            
             //_soundManager.PlayAudio("/Suoni/Sparo");
             RaycastHit hit;
-            Vector3 direction = boba.GetComponent<Rigidbody>().velocity.normalized;
-            if (Physics.Raycast(boba.transform.position, direction, out hit, Mathf.Infinity)) 
+            if (Physics.Raycast(boba.transform.position, direction, out hit, Mathf.Infinity, waterLayerMask))
             {
                 Transform hitObject = hit.collider.gameObject.transform;
+                if (hitObject != null)
+                {
+                    Debug.Log("Hit Seagull");
+                }
 
+                ;
                 // Check if the hit object is a seagull
                 if (hitObject.CompareTag("Seagull"))
                 {
+                    var targetHit = hitObject;
                     Debug.Log($"Seagull hit: {hitObject.name}");
                     //_soundManager.PlayAudio("/Suoni/Gabbiano Death");
-                    SeagullHit?.Invoke(hitObject);
+
+                    _seagullManager.ResetSeagull();
                     Destroy(boba);
                     yield break;
                 }
