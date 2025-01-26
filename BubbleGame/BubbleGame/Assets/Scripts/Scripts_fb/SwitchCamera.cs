@@ -22,13 +22,13 @@ public class SwitchCamera :  MonoBehaviour
 
         float scrollInput = Input.mouseScrollDelta.y;
         // Cambia alla telecamera 1 quando premi W o scrollUp
-        if (Input.GetKeyDown(KeyCode.W)||scrollInput>0)
+        if (Input.GetKeyDown(KeyCode.W)||scrollInput>0||Input.GetKeyDown(KeyCode.A))
         {
             Switch(1);
         }
 
         // Cambia alla telecamera 2 quando premi S o scrollDown
-        if (Input.GetKeyDown(KeyCode.S)||scrollInput<0)
+        if (Input.GetKeyDown(KeyCode.S)||scrollInput<0||Input.GetKeyDown(KeyCode.D))
         {
             Switch(2);
         }
