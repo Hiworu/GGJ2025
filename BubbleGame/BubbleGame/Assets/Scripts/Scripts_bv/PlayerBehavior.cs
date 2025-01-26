@@ -81,7 +81,7 @@ public class PlayerBehavior : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
             {
                 var target = hit.collider.gameObject;
-                _soundManager.PlayAudio("/Suoni/Interazione");
+                //_soundManager.PlayAudio("Suoni/Interazione.mp3");
                 Debug.LogWarning(target.name);
 
                 if (!_isStrawEquipped)
@@ -177,7 +177,7 @@ public class PlayerBehavior : MonoBehaviour
         if (_draggedObject != null && Input.GetMouseButton(0)) 
         {
             DragObject();
-            _soundManager.PlayAudio("/Suoni/Interazione");
+            //_soundManager.PlayAudio("/Suoni/Interazione");
         }
 
         //drop
@@ -186,7 +186,7 @@ public class PlayerBehavior : MonoBehaviour
             if (_draggedObject != null)
             {
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-                _soundManager.PlayAudio("/Suoni/Interazione");
+                //_soundManager.PlayAudio("/Suoni/Interazione");
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
                 {
                     var target = hit.collider.gameObject;
@@ -217,7 +217,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             _panelManager.ToggleStrawPanel();
             _ammo++;
-            _soundManager.PlayAudio("/Suoni/Sucking ballz");
+            //_soundManager.PlayAudio("/Suoni/Sucking ballz");
             if (_ammo > _maxAmmo)
             {
                 _ammo = _maxAmmo;
@@ -247,7 +247,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         Debug.Log($"Straw selected: {straw.name}");
         _isStrawEquipped = true;
-        _soundManager.PlayAudio("Interazione");
+        //_soundManager.PlayAudio("Interazione");
     }
 
 
@@ -269,7 +269,7 @@ public class PlayerBehavior : MonoBehaviour
         while (elapsedTime < bobaSpawnTime)
         {
             elapsedTime += Time.deltaTime;
-            _soundManager.PlayAudio("/Suoni/Sparo");
+            //_soundManager.PlayAudio("/Suoni/Sparo");
             RaycastHit hit;
             Vector3 direction = boba.GetComponent<Rigidbody>().velocity.normalized;
             if (Physics.Raycast(boba.transform.position, direction, out hit, Mathf.Infinity)) 
@@ -280,7 +280,7 @@ public class PlayerBehavior : MonoBehaviour
                 if (hitObject.CompareTag("Seagull"))
                 {
                     Debug.Log($"Seagull hit: {hitObject.name}");
-                    _soundManager.PlayAudio("/Suoni/Gabbiano Death");
+                    //_soundManager.PlayAudio("/Suoni/Gabbiano Death");
                     SeagullHit?.Invoke(hitObject);
                     Destroy(boba);
                     yield break;

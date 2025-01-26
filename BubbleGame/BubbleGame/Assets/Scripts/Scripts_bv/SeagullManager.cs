@@ -49,7 +49,7 @@ public class SeagullManager : MonoBehaviour
          _currentTime += Time.deltaTime;
          if (_currentTime >= seagullSpawnTimer)    
          { 
-            _soundManager.PlayAudio("/Suoni/Gabbiano arriva");
+            //_soundManager.PlayAudio("/Suoni/Gabbiano arriva");
             SpawnSeagull(); }
       }
 
@@ -69,7 +69,7 @@ public class SeagullManager : MonoBehaviour
    private void MoveSeagull()
    {
       _currentSeagullSpawnTime += Time.deltaTime;
-      _soundManager.PlayAudio("/Suoni/Gabbiano vola");
+      //_soundManager.PlayAudio("/Suoni/Gabbiano vola");
 
 
       if (_waveManager.customers.Count > 0)
