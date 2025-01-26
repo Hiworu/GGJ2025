@@ -67,6 +67,7 @@ public class CustomerOrder : MonoBehaviour
         _isOrderCompleted = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         AddTextures();
+        this.transform.Rotate(new Vector3(0, -90, 0));
     }
 
     private void Update()

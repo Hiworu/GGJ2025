@@ -56,7 +56,9 @@ public class WaveManagerScript : MonoBehaviour
     {
         // Istanzia il prefab
         Vector3 spawnPosition = spawnTransformList[customers.Count].position;
+        //Transform spawnRotation = spawnTransformList[customers.Count];
         GameObject newCustomer = Instantiate(customerPrefab, spawnPosition, Quaternion.identity);
+        newCustomer.transform.Rotate(new Vector3(0, -90, 0));
         customers.Add(newCustomer);
         Debug.Log("Customer instantiated. Total customers: " + customers.Count);
 
