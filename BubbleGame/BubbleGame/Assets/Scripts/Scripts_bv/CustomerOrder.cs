@@ -162,14 +162,14 @@ public class CustomerOrder : MonoBehaviour
     {
         _gameManager.playerHealth -=1;
         _waveManager.removeCustomer(this.gameObject);
-        _soundManager.PlayAudio("/Suoni/Donna_Rabbia");
+        //_soundManager.PlayAudio("/Suoni/Donna_Rabbia");
     }
 
     public void CustomerSatisfied()
     {
-        _soundManager.PlayAudio("/Suoni/Donna_Contenta");
+        //_soundManager.PlayAudio("/Suoni/Donna_Contenta");
         _gameManager.cash += customer.CashGiven;
-        _soundManager.PlayAudio("/Suoni/Cassaforte");
+        //_soundManager.PlayAudio("/Suoni/Cassaforte");
         _waveManager.removeCustomer(this.gameObject);
     }
 
