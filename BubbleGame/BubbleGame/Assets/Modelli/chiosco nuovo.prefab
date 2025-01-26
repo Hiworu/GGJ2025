@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 2730900994455062445}
   - component: {fileID: 7563799464915735310}
   - component: {fileID: 8591545768283082814}
+  - component: {fileID: 2971175331089720417}
   m_Layer: 0
   m_Name: stack_of_cups_geo_02
   m_TagString: Untagged
@@ -250,6 +251,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2971175331089720417
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433850692327602400}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.24048427, y: 0.57712007, z: 0.24048248}
+  m_Center: {x: -0.0005671494, y: -0.016816556, z: -0.003453523}
 --- !u!1 &1707933430553513976
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +532,7 @@ GameObject:
   - component: {fileID: 7919468711174926519}
   - component: {fileID: 2318834558262287909}
   - component: {fileID: 7746062173838785553}
+  - component: {fileID: 1777008664476309855}
   m_Layer: 0
   m_Name: stack_of_cups_geo_03
   m_TagString: Untagged
@@ -582,6 +605,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1777008664476309855
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182760639986615832}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.25768554, y: 0.7721776, z: 0.2576837}
+  m_Center: {x: -0.00065651536, y: 0.12670006, z: -0.0032101497}
 --- !u!1 &2196691443865639722
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +637,8 @@ GameObject:
   - component: {fileID: 6486786636852813217}
   - component: {fileID: 1794371740612551338}
   - component: {fileID: 2726744672346519323}
+  - component: {fileID: 7676809582462577214}
+  - component: {fileID: 5493441078013554066}
   m_Layer: 0
   m_Name: dispenser_geo_03
   m_TagString: Untagged
@@ -665,6 +711,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7676809582462577214
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2196691443865639722}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9131652, y: 1.0226337, z: 1.079694}
+  m_Center: {x: -0.0009313971, y: 0.26130676, z: 0.3841027}
+--- !u!114 &5493441078013554066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2196691443865639722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0756085c4ced4c41aa330decdb98344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syrupData: {fileID: 11400000, guid: 888da9bc1e2d1934ca8ef899d7a6fbc4, type: 2}
 --- !u!1 &2277211535089300278
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,6 +922,7 @@ GameObject:
   - component: {fileID: 884557052888793168}
   - component: {fileID: 5320425526446006723}
   - component: {fileID: 7880711710785451575}
+  - component: {fileID: 4635469281495410695}
   m_Layer: 0
   m_Name: mango
   m_TagString: Untagged
@@ -914,6 +995,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4635469281495410695
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369474959560738565}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.61812747, y: 0.06602478, z: 0.6513766}
+  m_Center: {x: -0.0004695207, y: -0.021243349, z: 0.059145972}
 --- !u!1 &2402934502537166268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,6 +1369,7 @@ GameObject:
   - component: {fileID: 8102563976136151370}
   - component: {fileID: 5742155238779378492}
   - component: {fileID: 6106046225503904236}
+  - component: {fileID: 6172428226873007695}
   m_Layer: 0
   m_Name: stack_of_cups_geo_01
   m_TagString: Untagged
@@ -1339,6 +1442,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6172428226873007695
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681248333498772923}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.24119717, y: 0.53193736, z: 0.24119538}
+  m_Center: {x: -0.00056882575, y: 0.0065802783, z: -0.0034638979}
 --- !u!1 &3759855385985989000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1474,8 @@ GameObject:
   - component: {fileID: 4015728725079705583}
   - component: {fileID: 1568711914460319973}
   - component: {fileID: 2509541090026004441}
+  - component: {fileID: 8253979278195459619}
+  - component: {fileID: 4607376765703287784}
   m_Layer: 0
   m_Name: cream_bottle_geo
   m_TagString: Untagged
@@ -1422,6 +1548,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8253979278195459619
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3759855385985989000}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.21308264, y: 0.54188275, z: 0.21308303}
+  m_Center: {x: -0.002016496, y: 0.015438303, z: -0.000001296401}
+--- !u!114 &4607376765703287784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3759855385985989000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f422d9973924549be004499c4e700e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toppingData: {fileID: 11400000, guid: 945a0d1d63dc90b48881f119a9289a4c, type: 2}
 --- !u!1 &3957525477914794863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1593,8 @@ GameObject:
   - component: {fileID: 3435054187731427079}
   - component: {fileID: 7697235990342294863}
   - component: {fileID: 1005039557581910969}
+  - component: {fileID: 1977802223340810477}
+  - component: {fileID: 1974918630054391852}
   m_Layer: 0
   m_Name: basket_geo_01
   m_TagString: Untagged
@@ -1505,6 +1667,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1977802223340810477
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957525477914794863}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3087531, y: 0.17781341, z: 0.3087532}
+  m_Center: {x: 0.000000014901161, y: -0.03949417, z: 0.000000074505806}
+--- !u!114 &1974918630054391852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957525477914794863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f422d9973924549be004499c4e700e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toppingData: {fileID: 11400000, guid: f019789e147324343982a8d7e08bb129, type: 2}
 --- !u!1 &4199457095236659796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,6 +2213,7 @@ GameObject:
   - component: {fileID: 3274480153921413289}
   - component: {fileID: 9089489042285231137}
   - component: {fileID: 1491777365214128523}
+  - component: {fileID: 3244594935475943595}
   m_Layer: 0
   m_Name: dispenser_geo_01
   m_TagString: Untagged
@@ -2089,6 +2286,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3244594935475943595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894693977598719778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0756085c4ced4c41aa330decdb98344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syrupData: {fileID: 11400000, guid: a8292a0b773517f478a637fd79bcd655, type: 2}
 --- !u!1 &5998414998623776648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2285,6 +2495,7 @@ GameObject:
   - component: {fileID: 1120355975696729020}
   - component: {fileID: 6717921093910046177}
   - component: {fileID: 2455467978058287808}
+  - component: {fileID: 3191947932814986779}
   m_Layer: 0
   m_Name: tapioca balls (1)
   m_TagString: Untagged
@@ -2357,6 +2568,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3191947932814986779
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250812964407466929}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5619339, y: 0.06602478, z: 0.6513766}
+  m_Center: {x: 0, y: -0.00000006146729, z: 0}
 --- !u!1 &6568534749145255837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2867,6 +3099,7 @@ GameObject:
   - component: {fileID: 880816374588596265}
   - component: {fileID: 5892054330969045456}
   - component: {fileID: 1443286601378635013}
+  - component: {fileID: 3233029558091451060}
   m_Layer: 0
   m_Name: shaker_base_geo
   m_TagString: Untagged
@@ -2939,6 +3172,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3233029558091451060
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8172313692241857104}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7502489, y: 0.5010521, z: 0.8155062}
+  m_Center: {x: 0.000000044703484, y: 0.24852532, z: -0.08532272}
 --- !u!1 &8360261846141438112
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,6 +3204,7 @@ GameObject:
   - component: {fileID: 4796483917703450590}
   - component: {fileID: 983249250365996263}
   - component: {fileID: 1380375026689218049}
+  - component: {fileID: 4528928182785636345}
   m_Layer: 0
   m_Name: tapioca balls
   m_TagString: Untagged
@@ -3022,6 +3277,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4528928182785636345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8360261846141438112}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5619339, y: 0.06602478, z: 0.6513766}
+  m_Center: {x: 0, y: -0.00000006146729, z: 0}
 --- !u!1 &8700923956217544823
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,6 +3395,8 @@ GameObject:
   - component: {fileID: 9195265466682890608}
   - component: {fileID: 7961994513365386570}
   - component: {fileID: 5686805558504919154}
+  - component: {fileID: 5226930492908262280}
+  - component: {fileID: 4011381970007632055}
   m_Layer: 0
   m_Name: dispenser_geo_02
   m_TagString: Untagged
@@ -3191,3 +3469,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5226930492908262280
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9054419707720466209}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9131651, y: 1.0226337, z: 1.079694}
+  m_Center: {x: -0.0009313375, y: 0.26130676, z: 0.3841027}
+--- !u!114 &4011381970007632055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9054419707720466209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0756085c4ced4c41aa330decdb98344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syrupData: {fileID: 11400000, guid: a9a36cfc7639e524d993ad5e2a4f1de2, type: 2}
