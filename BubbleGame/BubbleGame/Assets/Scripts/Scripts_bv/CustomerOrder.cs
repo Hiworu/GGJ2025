@@ -58,10 +58,10 @@ public class CustomerOrder : MonoBehaviour
         // customer.Toppings = new List<ToppingSO>(); customer.Toppings.Clear();
         // if (customer.Toppings == null || customer.Toppings.Count == 0)
         // { customer.Toppings.Add(RandomFromResources<ToppingSO>("Toppings")); }
-        
 
-        
-        
+
+
+
         _bubbleTeaManager.selectedBubble = null;
         _bubbleTeaManager.selectedSyrup = null;
         _bubbleTeaManager.selectedTopping = null;
@@ -86,6 +86,7 @@ public class CustomerOrder : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         AddTextures();
         this.transform.Rotate(new Vector3(0, -90, 0));
+        this.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f); // Uniform scaling
     }
 
     private void Update()
@@ -167,7 +168,7 @@ public class CustomerOrder : MonoBehaviour
         //Debug.Log(shirt);
 
         //GameObject order = Resources.Load<GameObject>("Prefabs/OrderBubble");
-        
+
         //order
         //Sprite boba = GetComponent<SpriteRenderer>().sprite;
         GameObject order = Instantiate(orderPrefab, this.transform.position, Quaternion.identity);
@@ -176,11 +177,11 @@ public class CustomerOrder : MonoBehaviour
         _spritePrefab = orderPrefab.transform.Find("Sprite")?.gameObject;
         _bobaPrefab = orderPrefab.transform.Find("Boba")?.gameObject;
         _toppingPrefab = orderPrefab.transform.Find("Topping")?.gameObject;
-        
 
-        if (body != null && hair != null )
+
+        if (body != null && hair != null)
         {
-            GameObject bodyClone = Instantiate(body, this.transform.position , Quaternion.identity);
+            GameObject bodyClone = Instantiate(body, this.transform.position, Quaternion.identity);
             bodyClone.transform.SetParent(this.transform); // Imposta this come genitore
             //Debug.Log("Body aggiunto come figlio: " + body.name);
 
