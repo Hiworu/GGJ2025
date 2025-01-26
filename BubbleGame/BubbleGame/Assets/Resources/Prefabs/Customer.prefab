@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5303132516168545288}
   m_Layer: 0
   m_Name: Customer
-  m_TagString: Untagged
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,5 +121,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customer: {fileID: 11400000, guid: b15f09e4c2a55fc4cb6bdaa49082133a, type: 2}
   waitTime: 10
-  hair: {fileID: 8618479654043703469, guid: e5ae7ceac0ba0473989a961c9793c8b4, type: 3}
-  body: {fileID: 756242190234602789, guid: d01cff7393da94354b17cae2536ed235, type: 3}

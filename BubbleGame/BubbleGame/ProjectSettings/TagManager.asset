@@ -9,6 +9,9 @@ TagManager:
   - Syrup
   - Topping
   - Straw
+  - Cup
+  - ActiveCup
+  - Customer
   layers:
   - Default
   - TransparentFX

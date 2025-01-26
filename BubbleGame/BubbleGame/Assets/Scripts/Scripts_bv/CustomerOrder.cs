@@ -103,14 +103,33 @@ public class CustomerOrder : MonoBehaviour
         return true;
     }
 
-    private void CustomerDissatisfied()
+
+    public bool ValidateOrder(List<BubbleSO> bubbles, List<SyrupSO> syrups, List<ToppingSO> toppings)
+    {
+        bool bubblesMatch = CompareLists(customer.Bubbles, bubbles);
+        bool syrupsMatch = CompareLists(customer.Syrups, syrups);
+        bool toppingsMatch = CompareLists(customer.Toppings, toppings);
+
+        if (bubblesMatch && syrupsMatch && toppingsMatch)
+        {
+            CustomerSatisfied();
+            return true; // Order is correct
+        }
+        else
+        {
+            CustomerDissatisfied();
+            return false; // Order is incorrect
+        }
+    }
+
+    public void CustomerDissatisfied()
     {
         _gameManager.playerHealth -= -1;
         _waveManager.removeCustomer(this.gameObject);
         Debug.Log($"customer removed:{this.gameObject.name}");
     }
 
-    private void CustomerSatisfied()
+    public void CustomerSatisfied()
     {
         _gameManager.cash += customer.CashGiven;
         _waveManager.removeCustomer(this.gameObject);
