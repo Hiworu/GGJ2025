@@ -21,17 +21,21 @@ public class CustomerOrder : MonoBehaviour
     private BubbleTeaManager _bubbleTeaManager;
     private SeagullManager _seagullManager;
     private WaveManagerScript _waveManager;
+    private SoundManager _soundManager;
 
     private SyrupBridge _customerSyrup;
     private BubbleBridge _customerBubble;
     private ToppingBridge _customerTopping;
 
+    
     public GameObject orderPrefab;
     private GameObject _spritePrefab;
     private GameObject _bobaPrefab;
     private GameObject _syrupPrefab;
     private GameObject _toppingPrefab;
     private GameObject _syrupBGPrefab;
+
+    private GameObject _customerCollider;
 
     private bool _isOrderCompleted;
     private float _currentTime;
@@ -126,11 +130,14 @@ public class CustomerOrder : MonoBehaviour
         // bool toppingsMatch = CompareLists(customer.Toppings, toppings);
         if (_bubbleTeaManager.selectedBubble && syrup == _bubbleTeaManager.selectedSyrup && topping == _bubbleTeaManager.selectedTopping)
         {
+            Debug.Log("Customer Satisfied");
             CustomerSatisfied();
             return true;
         }
         else
         {
+            Debug.Log("Customer Dissatisfied");
+
             CustomerDissatisfied();
             return false;
         }
@@ -150,11 +157,14 @@ public class CustomerOrder : MonoBehaviour
     {
         _gameManager.playerHealth -=1;
         _waveManager.removeCustomer(this.gameObject);
+        _soundManager.PlayAudio("Donna_Rabbia");
     }
 
     public void CustomerSatisfied()
     {
+        _soundManager.PlayAudio("Donna_Contenta");
         _gameManager.cash += customer.CashGiven;
+        _soundManager.PlayAudio("Cassaforte");
         _waveManager.removeCustomer(this.gameObject);
     }
 
@@ -168,6 +178,8 @@ public class CustomerOrder : MonoBehaviour
         GameObject shirt = customerStyles[2];
         //Debug.Log(shirt);
 
+        _customerCollider = this.transform.Find("CustomerCollider").gameObject;
+        if(_customerCollider == null) { Debug.Log("No collider found"); }
         //GameObject order = Resources.Load<GameObject>("Prefabs/OrderBubble");
 
         //order
