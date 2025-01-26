@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject _tapioca;
     private GameObject _strawGeo;
     private BubbleTeaManager _bubbleTeaManager;
+    private PanelManager _panelManager;
     
     private SyrupBridge _selectedSyrup;
     private BubbleBridge _selectedBubble;
@@ -53,6 +55,7 @@ public class PlayerBehavior : MonoBehaviour
         GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
         _switchCamera = gameManager.GetComponent<SwitchCamera>();
         _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
+        
         _camera = Camera.main; 
         
         _isStrawEquipped = false;
