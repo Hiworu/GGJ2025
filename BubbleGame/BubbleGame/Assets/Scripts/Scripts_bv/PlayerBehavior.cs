@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
@@ -21,9 +22,9 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject _strawGeo;
     private BubbleTeaManager _bubbleTeaManager;
     
-    private SyrupSO _selectedSyrup;
-    private BubbleSO _selectedBubble;
-    private ToppingSO _selectedTopping;
+    private SyrupBridge _selectedSyrup;
+    private BubbleBridge _selectedBubble;
+    private ToppingBridge _selectedTopping;
     
     private GameObject _activeCup;
     private bool doesCupExist;
@@ -101,7 +102,7 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     if (!doesCupExist|| doesBobaExist) { return;}
                     _activeBoba = Instantiate(bobaPrefab, hit.point, Quaternion.identity);
-                    _selectedBubble = target.GetComponent<BubbleSO>();
+                    _selectedBubble = target.GetComponent<BubbleBridge>();
 
                     doesBobaExist = true;
                     _draggedObject = _activeBoba;
@@ -110,7 +111,7 @@ public class PlayerBehavior : MonoBehaviour
                 if (target.CompareTag("Syrup") && doesBobaExist)
                 {
                     _syrup.SetActive(true);
-                    _selectedSyrup = target.GetComponent<SyrupSO>();
+                    _selectedSyrup = target.GetComponent<SyrupBridge>();
 
                     doesSyrupExist = true;
                 }
@@ -119,7 +120,7 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     _strawGeo.SetActive(true);
                     _cupCoverGeo.SetActive(true);
-                    _selectedTopping = target.GetComponent<ToppingSO>();
+                    _selectedTopping = target.GetComponent<ToppingBridge>();
 
                     _activeCup.transform.position = cupReadyPosition.position;
                     isReady = true;
@@ -131,12 +132,16 @@ public class PlayerBehavior : MonoBehaviour
                     {
                         bool orderCorrect = customerOrder.ValidateOrder
                         (
-                            _bubbleTeaManager.selectedBubbles, // List<BubbleSO>
-                            _bubbleTeaManager.selectedSyrups, // List<SyrupSO>
-                            _bubbleTeaManager.selectedToppings // List<ToppingSO>
+                            // _bubbleTeaManager.selectedBubbles, // List<BubbleSO>
+                            // _bubbleTeaManager.selectedSyrups, // List<SyrupSO>
+                            // _bubbleTeaManager.selectedToppings // List<ToppingSO>
+                            
+                            _bubbleTeaManager.selectedBubble,
+                            _bubbleTeaManager.selectedSyrup,
+                            _bubbleTeaManager.selectedTopping
                             );
-                        if (orderCorrect) { Debug.Log("Customer Satisfied"); }
-                        else { Debug.Log("Customer Dissatisfied"); }
+                        if (orderCorrect) { Debug.Log("Customer Satisfied"); customerOrder.CustomerSatisfied();}
+                        else { Debug.Log("Customer Dissatisfied"); customerOrder.CustomerDissatisfied(); }
                         
                         ResetCup();
                     }

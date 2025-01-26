@@ -121,3 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customer: {fileID: 11400000, guid: b15f09e4c2a55fc4cb6bdaa49082133a, type: 2}
   waitTime: 10
+  orderPrefab: {fileID: 4558292444468139302, guid: bef526cb14eeedb419415c69e7c7fdad, type: 3}
