@@ -21,6 +21,9 @@ public class CustomerOrder : MonoBehaviour
     private SeagullManager _seagullManager;
     private WaveManagerScript _waveManager;
 
+    private SyrupSO _customerSyrup;
+    private BubbleSO _customerBubble;
+    private ToppingSO _customerTopping;
 
     private bool _isOrderCompleted;
     private float _currentTime;
@@ -39,13 +42,13 @@ public class CustomerOrder : MonoBehaviour
         _waveManager = gameManager.GetComponent<WaveManagerScript>();
 
         //RANDOMIZED INGREDIENTS IF LIST == NULL
-        if (customer.Bubbles == null) { customer.Bubbles = new List<BubbleSO>(); }
+        customer.Bubbles = new List<BubbleSO>(); customer.Bubbles.Clear();
         if (customer.Bubbles == null || customer.Bubbles.Count == 0)
         { customer.Bubbles.Add(RandomFromResources<BubbleSO>("Bubbles")); }
-        if (customer.Syrups == null) { customer.Syrups = new List<SyrupSO>(); }
+        customer.Syrups = new List<SyrupSO>(); customer.Syrups.Clear();
         if (customer.Syrups == null || customer.Syrups.Count == 0)
         { customer.Syrups.Add(RandomFromResources<SyrupSO>("Syrups")); }
-        if (customer.Toppings == null) { customer.Toppings = new List<ToppingSO>(); }
+        customer.Toppings = new List<ToppingSO>(); customer.Toppings.Clear();
         if (customer.Toppings == null || customer.Toppings.Count == 0)
         { customer.Toppings.Add(RandomFromResources<ToppingSO>("Toppings")); }
     }

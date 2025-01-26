@@ -21,7 +21,9 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject _strawGeo;
     private BubbleTeaManager _bubbleTeaManager;
     
-    
+    private SyrupSO _selectedSyrup;
+    private BubbleSO _selectedBubble;
+    private ToppingSO _selectedTopping;
     
     private GameObject _activeCup;
     private bool doesCupExist;
@@ -99,6 +101,8 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     if (!doesCupExist|| doesBobaExist) { return;}
                     _activeBoba = Instantiate(bobaPrefab, hit.point, Quaternion.identity);
+                    _selectedBubble = target.GetComponent<BubbleSO>();
+
                     doesBobaExist = true;
                     _draggedObject = _activeBoba;
                 }
@@ -106,6 +110,8 @@ public class PlayerBehavior : MonoBehaviour
                 if (target.CompareTag("Syrup") && doesBobaExist)
                 {
                     _syrup.SetActive(true);
+                    _selectedSyrup = target.GetComponent<SyrupSO>();
+
                     doesSyrupExist = true;
                 }
 
@@ -113,6 +119,8 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     _strawGeo.SetActive(true);
                     _cupCoverGeo.SetActive(true);
+                    _selectedTopping = target.GetComponent<ToppingSO>();
+
                     _activeCup.transform.position = cupReadyPosition.position;
                     isReady = true;
                 }

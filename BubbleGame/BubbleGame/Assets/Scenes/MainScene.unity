@@ -1251,7 +1251,7 @@ Transform:
   m_GameObject: {fileID: 1190837732}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.687}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1577,7 +1577,7 @@ MonoBehaviour:
   seagullSpawnTimer: 10
   seagullTimer: 5
   attackSeagullTime: 7
-  seagullPrefab: {fileID: 9014553888168398750, guid: 03358102179dd81459fb273d2c307143, type: 3}
+  seagullPrefab: {fileID: 6299513045323307053, guid: d063d08509869e84aa244641ae86f2cb, type: 3}
   seagullSpawnPoint: {fileID: 1989873832}
 --- !u!1 &1974705174
 GameObject:
@@ -1635,7 +1635,7 @@ Transform:
   m_GameObject: {fileID: 1989873831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.63, y: 5.12, z: 16.68}
+  m_LocalPosition: {x: -42.5, y: 5.12, z: 16.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
