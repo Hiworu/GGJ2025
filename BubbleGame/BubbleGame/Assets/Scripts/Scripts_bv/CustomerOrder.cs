@@ -148,7 +148,7 @@ public class CustomerOrder : MonoBehaviour
 
     public void CustomerDissatisfied()
     {
-        _gameManager.playerHealth -= 1;
+        _gameManager.playerHealth -=1;
         _waveManager.removeCustomer(this.gameObject);
     }
 
