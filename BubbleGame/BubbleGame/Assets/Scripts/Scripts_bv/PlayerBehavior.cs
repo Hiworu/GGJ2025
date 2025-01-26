@@ -14,6 +14,7 @@ public class PlayerBehavior : MonoBehaviour
     private SwitchCamera _switchCamera;
     private GameObject _bobaPrefab;
     private Transform _bobaSpawnPoint;
+    private SoundManager _soundManager;
 
     public GameObject cup;
     private GameObject _syrup;

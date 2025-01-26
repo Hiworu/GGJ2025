@@ -21,6 +21,7 @@ public class CustomerOrder : MonoBehaviour
     private BubbleTeaManager _bubbleTeaManager;
     private SeagullManager _seagullManager;
     private WaveManagerScript _waveManager;
+    private SoundManager _soundManager;
 
     private SyrupBridge _customerSyrup;
     private BubbleBridge _customerBubble;
@@ -150,12 +151,14 @@ public class CustomerOrder : MonoBehaviour
     {
         _gameManager.playerHealth -= 1;
         _waveManager.removeCustomer(this.gameObject);
+        _soundManager.PlayAudio("Donna_Rabbia");
     }
 
     public void CustomerSatisfied()
     {
         _gameManager.cash += customer.CashGiven;
         _waveManager.removeCustomer(this.gameObject);
+        _soundManager.PlayAudio("Donna_Contenta");
     }
 
     private void AddTextures()
