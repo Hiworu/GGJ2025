@@ -80,6 +80,7 @@ public class PlayerBehavior : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
             {
                 var target = hit.collider.gameObject;
+                _soundManager.PlayAudio("Interazione");
                 Debug.LogWarning(target.name);
 
                 if (target.CompareTag("Cup"))
@@ -168,6 +169,7 @@ public class PlayerBehavior : MonoBehaviour
         if (_draggedObject != null && Input.GetMouseButton(0)) 
         {
             DragObject();
+            _soundManager.PlayAudio("Interazione");
         }
 
         //drop
@@ -176,6 +178,7 @@ public class PlayerBehavior : MonoBehaviour
             if (_draggedObject != null)
             {
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                _soundManager.PlayAudio("Interazione");
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
                 {
                     var target = hit.collider.gameObject;
@@ -205,6 +208,7 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && _isStrawEquipped)
         {
             _ammo++;
+            _soundManager.PlayAudio("Sucking ballz");
             if (_ammo > _maxAmmo)
             {
                 _ammo = _maxAmmo;
@@ -234,6 +238,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         Debug.Log($"Straw selected: {straw.name}");
         _isStrawEquipped = true;
+        _soundManager.PlayAudio("Interazione");
     }
 
 
@@ -255,6 +260,7 @@ public class PlayerBehavior : MonoBehaviour
         while (elapsedTime < bobaSpawnTime)
         {
             elapsedTime += Time.deltaTime;
+            _soundManager.PlayAudio("Sparo");
             RaycastHit hit;
             Vector3 direction = boba.GetComponent<Rigidbody>().velocity.normalized;
             if (Physics.Raycast(boba.transform.position, direction, out hit, Mathf.Infinity)) 

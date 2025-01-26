@@ -162,9 +162,10 @@ public class CustomerOrder : MonoBehaviour
 
     public void CustomerSatisfied()
     {
-        _gameManager.cash += customer.CashGiven;
-        _waveManager.removeCustomer(this.gameObject);
         _soundManager.PlayAudio("Donna_Contenta");
+        _gameManager.cash += customer.CashGiven;
+        _soundManager.PlayAudio("Cassaforte");
+        _waveManager.removeCustomer(this.gameObject);
     }
 
     private void AddTextures()
