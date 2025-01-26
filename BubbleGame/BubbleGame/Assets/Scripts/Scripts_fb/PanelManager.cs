@@ -16,9 +16,5 @@ public class PanelManager : MonoBehaviour
     public void ToggleStrawPanel()
     {
         handPanel.SetActive(!handPanel.activeSelf);
-        
-        //cursore non scompare
-        Cursor.lockState = CursorLockMode.None; 
-        Cursor.visible = true;
     }
 }
