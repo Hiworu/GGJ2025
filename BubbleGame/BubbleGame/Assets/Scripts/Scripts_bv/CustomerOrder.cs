@@ -31,6 +31,7 @@ public class CustomerOrder : MonoBehaviour
     private GameObject _bobaPrefab;
     private GameObject _syrupPrefab;
     private GameObject _toppingPrefab;
+    private GameObject _syrupBGPrefab;
 
     private bool _isOrderCompleted;
     private float _currentTime;
@@ -147,7 +148,7 @@ public class CustomerOrder : MonoBehaviour
 
     public void CustomerDissatisfied()
     {
-        _gameManager.playerHealth -= -1;
+        _gameManager.playerHealth -= 1;
         _waveManager.removeCustomer(this.gameObject);
     }
 
@@ -177,7 +178,7 @@ public class CustomerOrder : MonoBehaviour
         _spritePrefab = orderPrefab.transform.Find("Sprite")?.gameObject;
         _bobaPrefab = orderPrefab.transform.Find("Boba")?.gameObject;
         _toppingPrefab = orderPrefab.transform.Find("Topping")?.gameObject;
-
+        _syrupBGPrefab = orderPrefab.transform.Find("SyrupBG")?.gameObject;
 
         if (body != null && hair != null)
         {
@@ -231,6 +232,8 @@ public class CustomerOrder : MonoBehaviour
             bobaRenderer.sprite = _bubbleTeaManager.selectedBubble.sprite; // Assuming selectedBubble has a Sprite property
             SpriteRenderer toppingRenderer = _toppingPrefab.GetComponent<SpriteRenderer>();
             toppingRenderer.sprite = _bubbleTeaManager.selectedTopping.sprite; // Assuming selectedTopping has a Sprite property
+            SpriteRenderer syrupBGRenderer = _syrupBGPrefab.GetComponent<SpriteRenderer>();
+            syrupBGRenderer.sprite = _bubbleTeaManager.selectedSyrup.sprite; // Assuming selectedTopping has a Sprite property
 
         }
     }
