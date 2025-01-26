@@ -83,87 +83,94 @@ public class PlayerBehavior : MonoBehaviour
                 _soundManager.PlayAudio("Interazione");
                 Debug.LogWarning(target.name);
 
-                if (target.CompareTag("Cup"))
+                if (!_isStrawEquipped)
                 {
-                    if (doesCupExist) { return; }
-                    _activeCup = Instantiate(cup, cupSpawnPoint.position, Quaternion.identity);
-                    
-
-                    // Find specific child objects by name
-                    _syrup = _activeCup.transform.Find("Liquido").gameObject;
-                    _tapioca = _activeCup.transform.Find("Tapioca").gameObject;
-                    _strawGeo = _activeCup.transform.Find("straw_geo").gameObject;
-                    _cupCoverGeo = _activeCup.transform.Find("cup_cover_geo").gameObject;
-
-                    _syrup.SetActive(false);
-                    _tapioca.SetActive(false);
-                    _strawGeo.SetActive(false);
-                    _cupCoverGeo.SetActive(false);
-
-                    doesCupExist = true;
-                }
-                
-                if (target.CompareTag("Bubble"))
-                {
-                    if (!doesCupExist|| doesBobaExist) { return;}
-                    _activeBoba = Instantiate(bobaPrefab, hit.point, Quaternion.identity);
-                    _selectedBubble = target.GetComponent<BubbleBridge>();
-
-                    doesBobaExist = true;
-                    _draggedObject = _activeBoba;
-                }
-
-                if (target.CompareTag("Syrup") && doesBobaExist)
-                {
-                    _syrup.SetActive(true);
-                    _selectedSyrup = target.GetComponent<SyrupBridge>();
-
-                    doesSyrupExist = true;
-                }
-
-                if (target.CompareTag("Topping") && doesSyrupExist)
-                {
-                    _strawGeo.SetActive(true);
-                    _cupCoverGeo.SetActive(true);
-                    _selectedTopping = target.GetComponent<ToppingBridge>();
-
-                    _activeCup.transform.position = cupReadyPosition.position;
-                    isReady = true;
-                }
-
-
-                if (target.CompareTag("Customer") && isReady)
-                {
-                    CustomerOrder customerOrder = target.GetComponentInParent<CustomerOrder>();
-                    if (customerOrder != null)
+                    if (target.CompareTag("Cup"))
                     {
-                        bool isOrderValid = customerOrder.ValidateOrder
-                            (_bubbleTeaManager.selectedBubble, _bubbleTeaManager.selectedSyrup, _bubbleTeaManager.selectedTopping);
-                        if (isOrderValid)
+                        if (doesCupExist)
                         {
-                            Debug.Log("Customer is satisfied!");
+                            return;
                         }
-                        else
-                        {
-                            Debug.Log("Customer is dissatisfied.");
-                        }
-                        
-                        ResetCup();
+
+                        _activeCup = Instantiate(cup, cupSpawnPoint.position, Quaternion.identity);
+
+
+                        // Find specific child objects by name
+                        _syrup = _activeCup.transform.Find("Liquido").gameObject;
+                        _tapioca = _activeCup.transform.Find("Tapioca").gameObject;
+                        _strawGeo = _activeCup.transform.Find("straw_geo").gameObject;
+                        _cupCoverGeo = _activeCup.transform.Find("cup_cover_geo").gameObject;
+
+                        _syrup.SetActive(false);
+                        _tapioca.SetActive(false);
+                        _strawGeo.SetActive(false);
+                        _cupCoverGeo.SetActive(false);
+
+                        doesCupExist = true;
                     }
 
+                    if (target.CompareTag("Bubble"))
+                    {
+                        if (!doesCupExist || doesBobaExist)
+                        {
+                            return;
+                        }
+
+                        _activeBoba = Instantiate(bobaPrefab, hit.point, Quaternion.identity);
+                        _selectedBubble = target.GetComponent<BubbleBridge>();
+
+                        doesBobaExist = true;
+                        _draggedObject = _activeBoba;
+                    }
+
+                    if (target.CompareTag("Syrup") && doesBobaExist)
+                    {
+                        _syrup.SetActive(true);
+                        _selectedSyrup = target.GetComponent<SyrupBridge>();
+
+                        doesSyrupExist = true;
+                    }
+
+                    if (target.CompareTag("Topping") && doesSyrupExist)
+                    {
+                        _strawGeo.SetActive(true);
+                        _cupCoverGeo.SetActive(true);
+                        _selectedTopping = target.GetComponent<ToppingBridge>();
+
+                        _activeCup.transform.position = cupReadyPosition.position;
+                        isReady = true;
+                    }
+
+
+                    if (target.CompareTag("Customer") && isReady)
+                    {
+                        CustomerOrder customerOrder = target.GetComponentInParent<CustomerOrder>();
+                        if (customerOrder != null)
+                        {
+                            bool isOrderValid = customerOrder.ValidateOrder
+                            (_bubbleTeaManager.selectedBubble, _bubbleTeaManager.selectedSyrup,
+                                _bubbleTeaManager.selectedTopping);
+                            if (isOrderValid)
+                            {
+                                Debug.Log("Customer is satisfied!");
+                            }
+                            else
+                            {
+                                Debug.Log("Customer is dissatisfied.");
+                            }
+
+                            ResetCup();
+                        }
+                    }
+                }
+
+                if (_isStrawEquipped )
+                {
+                    if (_ammo > 0)
+                    { ShootBoba(); }
                     
                 }
                 
-                //if (target == straw)
-                else if (target.CompareTag("Straw"))
-                {
-                    SelectStraw(target);
-                    
-                    if (_ammo > 0 && !_isStrawEquipped)
-                    {
-                        ShootBoba();
-                    }
-                }
             }
         }
         if (_draggedObject != null && Input.GetMouseButton(0)) 
@@ -207,6 +214,7 @@ public class PlayerBehavior : MonoBehaviour
         //charge straw
         if (Input.GetMouseButtonDown(1) && _isStrawEquipped)
         {
+            _panelManager.ToggleStrawPanel();
             _ammo++;
             _soundManager.PlayAudio("Sucking ballz");
             if (_ammo > _maxAmmo)
