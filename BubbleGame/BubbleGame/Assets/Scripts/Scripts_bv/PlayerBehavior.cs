@@ -127,21 +127,20 @@ public class PlayerBehavior : MonoBehaviour
                 }
                 if (target.CompareTag("Customer") && isReady)
                 {
+                    
                     CustomerOrder customerOrder = target.GetComponent<CustomerOrder>();
                     if (customerOrder != null)
                     {
-                        bool orderCorrect = customerOrder.ValidateOrder
-                        (
-                            // _bubbleTeaManager.selectedBubbles, // List<BubbleSO>
-                            // _bubbleTeaManager.selectedSyrups, // List<SyrupSO>
-                            // _bubbleTeaManager.selectedToppings // List<ToppingSO>
-                            
-                            _bubbleTeaManager.selectedBubble,
-                            _bubbleTeaManager.selectedSyrup,
-                            _bubbleTeaManager.selectedTopping
-                            );
-                        if (orderCorrect) { Debug.Log("Customer Satisfied"); customerOrder.CustomerSatisfied();}
-                        else { Debug.Log("Customer Dissatisfied"); customerOrder.CustomerDissatisfied(); }
+                        bool isOrderValid = customerOrder.ValidateOrder
+                            (_bubbleTeaManager.selectedBubble, _bubbleTeaManager.selectedSyrup, _bubbleTeaManager.selectedTopping);
+                        if (isOrderValid)
+                        {
+                            Debug.Log("Customer is satisfied!");
+                        }
+                        else
+                        {
+                            Debug.Log("Customer is dissatisfied.");
+                        }
                         
                         ResetCup();
                     }

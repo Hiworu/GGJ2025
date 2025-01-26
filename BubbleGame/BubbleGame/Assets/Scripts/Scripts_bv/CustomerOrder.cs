@@ -126,11 +126,14 @@ public class CustomerOrder : MonoBehaviour
         // bool toppingsMatch = CompareLists(customer.Toppings, toppings);
         if (_bubbleTeaManager.selectedBubble && syrup == _bubbleTeaManager.selectedSyrup && topping == _bubbleTeaManager.selectedTopping)
         {
+            Debug.Log("Customer Satisfied");
             CustomerSatisfied();
             return true;
         }
         else
         {
+            Debug.Log("Customer Dissatisfied");
+
             CustomerDissatisfied();
             return false;
         }
