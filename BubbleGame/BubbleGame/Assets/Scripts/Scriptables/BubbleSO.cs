@@ -6,5 +6,6 @@ using UnityEngine;
 
 public class BubbleSO : ScriptableObject
 {
+    
     public Sprite sprite;
 }

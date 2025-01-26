@@ -21,9 +21,9 @@ public class CustomerOrder : MonoBehaviour
     private SeagullManager _seagullManager;
     private WaveManagerScript _waveManager;
 
-    private SyrupSO _customerSyrup;
-    private BubbleSO _customerBubble;
-    private ToppingSO _customerTopping;
+    private SyrupBridge _customerSyrup;
+    private BubbleBridge _customerBubble;
+    private ToppingBridge _customerTopping;
 
     private bool _isOrderCompleted;
     private float _currentTime;
