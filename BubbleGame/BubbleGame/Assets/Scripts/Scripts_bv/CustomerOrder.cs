@@ -52,7 +52,7 @@ public class CustomerOrder : MonoBehaviour
         _bubbleTeaManager = gameManager.GetComponent<BubbleTeaManager>();
         _seagullManager = gameManager.GetComponent<SeagullManager>();
         _waveManager = gameManager.GetComponent<WaveManagerScript>();
-
+        _soundManager = gameManager.GetComponent<SoundManager>();
         //RANDOMIZED INGREDIENTS IF LIST == NULL
         // customer.Bubbles = new List<BubbleSO>(); customer.Bubbles.Clear();
         // if (customer.Bubbles == null || customer.Bubbles.Count == 0)

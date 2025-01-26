@@ -11,15 +11,9 @@ public class PanelManager : MonoBehaviour
         handPanel.SetActive(false);
     }
 
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(1))
-        {
-            ToggleUI();
-        }
-    }
 
-    private void ToggleUI()
+
+    public void ToggleStrawPanel()
     {
         handPanel.SetActive(!handPanel.activeSelf);
         
